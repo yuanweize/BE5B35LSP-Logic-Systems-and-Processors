@@ -1,0 +1,65 @@
+
+State Machine - |task2|Lcd16x2Text:inst15|LcdController:b2v_inst2|\fsm:next_state
+Name \fsm:next_state.wait_end \fsm:next_state.write_clear_e \fsm:next_state.write_clear \fsm:next_state.write_data_busy_test \fsm:next_state.write_data_e \fsm:next_state.write_data \fsm:next_state.write_address_busy_OK \fsm:next_state.write_address_busy_test \fsm:next_state.write_address_hold \fsm:next_state.write_address_e \fsm:next_state.command_loop_wait_RDYN \fsm:next_state.wait_fast_frequency \fsm:next_state.func_set_inc \fsm:next_state.func_set_e \fsm:next_state.func_set \fsm:next_state.reset2 \fsm:next_state.reset1 \fsm:next_state.reset0 
+\fsm:next_state.reset0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+\fsm:next_state.reset1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+\fsm:next_state.reset2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+\fsm:next_state.func_set 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+\fsm:next_state.func_set_e 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+\fsm:next_state.func_set_inc 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+\fsm:next_state.wait_fast_frequency 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+\fsm:next_state.command_loop_wait_RDYN 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+\fsm:next_state.write_address_e 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_address_hold 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_address_busy_test 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_address_busy_OK 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_data 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_data_e 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_data_busy_test 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_clear 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.write_clear_e 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:next_state.wait_end 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |task2|Lcd16x2Text:inst15|LcdController:b2v_inst2|\fsm:current_state
+Name \fsm:current_state.wait_end \fsm:current_state.write_clear_e \fsm:current_state.write_clear \fsm:current_state.write_data_busy_test \fsm:current_state.write_data_e \fsm:current_state.write_data \fsm:current_state.write_address_busy_OK \fsm:current_state.write_address_busy_test \fsm:current_state.write_address_hold \fsm:current_state.write_address_e \fsm:current_state.command_loop_wait_RDYN \fsm:current_state.wait_fast_frequency \fsm:current_state.func_set_inc \fsm:current_state.func_set_e \fsm:current_state.func_set \fsm:current_state.reset2 \fsm:current_state.reset1 \fsm:current_state.reset0 
+\fsm:current_state.reset0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+\fsm:current_state.reset1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+\fsm:current_state.reset2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+\fsm:current_state.func_set 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+\fsm:current_state.func_set_e 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+\fsm:current_state.func_set_inc 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+\fsm:current_state.wait_fast_frequency 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+\fsm:current_state.command_loop_wait_RDYN 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+\fsm:current_state.write_address_e 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_address_hold 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_address_busy_test 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_address_busy_OK 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_data 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_data_e 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_data_busy_test 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_clear 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.write_clear_e 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+\fsm:current_state.wait_end 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |task2|Lcd16x2Text:inst15|LcdController:b2v_inst2|\switch_rw:nstate
+Name \switch_rw:nstate.rws_busy \switch_rw:nstate.rws_read \switch_rw:nstate.rws_z \switch_rw:nstate.rws_write_data 
+\switch_rw:nstate.rws_write_data 0 0 0 0 
+\switch_rw:nstate.rws_z 0 0 1 1 
+\switch_rw:nstate.rws_read 0 1 0 1 
+\switch_rw:nstate.rws_busy 1 0 0 1 
+
+State Machine - |task2|Lcd16x2Text:inst15|LcdController:b2v_inst2|\switch_rw:state
+Name \switch_rw:state.rws_write_data \switch_rw:state.rws_read \switch_rw:state.rws_z \switch_rw:state.rws_busy 
+\switch_rw:state.rws_busy 0 0 0 0 
+\switch_rw:state.rws_z 0 0 1 1 
+\switch_rw:state.rws_read 0 1 0 1 
+\switch_rw:state.rws_write_data 1 0 0 1 
+
+State Machine - |task2|Buzzer750Hz:inst16|Buzzer:inst_Buzzer|Buzzer_AudioCodec:b2v_inst_audioCodecController|currentState
+Name currentState.stop currentState.incrementMuxSelectBits currentState.turnOffi2cControl currentState.checkAcknowledge currentState.transmit currentState.resetState 
+currentState.resetState 0 0 0 0 0 0 
+currentState.transmit 0 0 0 0 1 1 
+currentState.checkAcknowledge 0 0 0 1 0 1 
+currentState.turnOffi2cControl 0 0 1 0 0 1 
+currentState.incrementMuxSelectBits 0 1 0 0 0 1 
+currentState.stop 1 0 0 0 0 1 

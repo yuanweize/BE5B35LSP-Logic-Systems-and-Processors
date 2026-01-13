@@ -1,0 +1,37 @@
+@README version March 23, 2025 - the list of default project files
+--------------------------------
+
+Demo_LCD - top-level entity as Block Diagram Schematic
+Demo_LCDvhd - identical with Demo_LCD, but in VHDL
+
+LCDlogic0.vdh - prototype for your logic image creation
+--------- packages --------------------------------
+LCDpackV2.vhd -- LCD definitions
+
+testbenchV2_LCDlogic.vhd - it creates text file for Testbench Viewer from FPGA-LCD Utilis
+simulation/runLCD.bat  -- batch file for running simulation in GHDL
+
+
+-------------------------------------------------------------
+LCDpackV2.vhd -- VHDL package shared definition. The packages are explained in:
+--cz: kapitola 7 v  https://dcenet.fel.cvut.cz/edu/fpga/doc/UvodDoVHDL1_concurrent_V20.pdf
+--eng: Chapter 7 in https://dcenet.fel.cvut.cz/edu/fpga/doc/CircuitDesignWithVHDL_dataflow_and_structural_eng_V10.pdf 
+---------------------------------------------------------------
+
+LSP.qpf  and LSP.qfs - Quartus project files
+
+=================================================================
+*** VeekMT2 files
+VeekMT2_LCDgenV2.vhd - LCD generator
+VeekMT2_LCDregV2.vhd - LCD register
+
+
+
+=============== always copy them into each LCD Quartus project ====================
+VeekMT2_PinAssignments.csv - Pin Assignments of VeekMT2 board
+
+*** TimeQuest Analyzer files 
+
+VeekMT2.sdc - basic definitions for TimeQuest Analyzer
+VeekMT2_LCD.sdc - added definition for VeekMT2_LCDgenV2 with the instance name "iLCDgenerator"
+

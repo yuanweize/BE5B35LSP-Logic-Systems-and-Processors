@@ -1,0 +1,95 @@
+Return-Path: <SRS0=R41V=7O=cvut.cz=noreply@fel.cvut.cz>
+Received: from max2.feld.cvut.cz ([192.168.200.4])
+	 by cimap (Cyrus 3.12.1) with LMTPA;
+	 Fri, 09 Jan 2026 15:00:10 +0100
+X-Cyrus-Session-Id: cyrus-1767967210-2820984-1-1644023939115166385
+X-Sieve: CMU Sieve 3.0
+Received: from localhost (unknown [192.168.200.27])
+	by max2.feld.cvut.cz (Postfix) with ESMTP id 23CEAD7D0A
+	for <yuanweiz@fel.cvut.cz>; Fri, 09 Jan 2026 15:00:10 +0100 (CET)
+X-Virus-Scanned: IMAP STYX AMAVIS
+Authentication-Results: cerokez-250.feld.cvut.cz (amavis);
+ dkim=pass (2048-bit key) header.d=cvut.cz
+Received: from max2.feld.cvut.cz ([192.168.200.4])
+ by localhost (cerokez-250.feld.cvut.cz [192.168.200.27]) (amavis, port 10045)
+ with ESMTP id lDgLtmg4azMo for <yuanweiz@fel.cvut.cz>;
+ Fri,  9 Jan 2026 15:00:08 +0100 (CET)
+Authentication-Results: max2.feld.cvut.cz; dmarc=pass (p=reject dis=none) header.from=cvut.cz
+Authentication-Results: max2.feld.cvut.cz;
+	dkim=pass (2048-bit key; unprotected) header.d=cvut.cz header.i=@cvut.cz header.a=rsa-sha256 header.s=mailgw5-20201118 header.b=RKh7NMrW;
+	dkim-atps=neutral
+Received-SPF: pass (cvut.cz: 2001:718:2:2202::25 is authorized to use 'noreply@cvut.cz' in 'mfrom' identity (mechanism 'ip6:2001:718:2:2202::25' matched)) receiver=max2.fel.cvut.cz; identity=mailfrom; envelope-from="noreply@cvut.cz"; helo=mailgw5.cvut.cz; client-ip="2001:718:2:2202::25"
+Received: from mailgw5.cvut.cz (mailgw5.cvut.cz [IPv6:2001:718:2:2202::25])
+	by max2.feld.cvut.cz (Postfix) with ESMTPS id C9302D7D09
+	for <yuanweiz@fel.cvut.cz>; Fri, 09 Jan 2026 15:00:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cvut.cz;
+	s=mailgw5-20201118; t=1767967208; i=@cvut.cz;
+	bh=iU8uG41T4CwnXlRW34fLbOzp173KHo6AOSshltqm14Y=;
+	h=Date:From:Reply-To:To:Message-ID:Subject:MIME-Version:
+	 Content-Type:From;
+	b=RKh7NMrW0phm33VKilbj4mrNtNqR5nBAhB6rJyRd5cRplDe10vI77G9vU/m9Il1cY
+	 7n4wQDMFAMZxt2krnB506euCJRAhoHwvcRyq+DxdTDA5P7J/gMP6s31STbiV4ScJMK
+	 6K4GCxKUc4sXQ/56ptNRO1AngFXYY/d1MwEFEJ6uede3XvfhqLo7U3pzWahZCRYRc7
+	 HwySBYNk4+w/f0e4V2+V9UCfDfyroeKeWCNfvfvgSOj9DaP03Fi49kARALpTgJITW0
+	 R/oiFiIdm24NvSvLIOJvCaQe6r9LFMlqWPc+ucTII8Hk7GdmBcGUjXpx+DAdf1f0ZZ
+	 h6C0wEIOJRtXg==
+Received: from kos-forms12.is.cvut.cz (oss-dmz.is.cvut.cz [147.32.3.237])
+	by mailgw5.cvut.cz (mailserver) with ESMTP id 4dnk1N2l0nzPnq1
+	for <yuanweiz@fel.cvut.cz>; Fri,  9 Jan 2026 15:00:08 +0100 (CET)
+Received: from forms12-kos.web.dmz (localhost [127.0.0.1])
+	by kos-forms12.is.cvut.cz (Postfix) with ESMTP id 4dnk1N2dJYz72
+	for <yuanweiz@fel.cvut.cz>; Fri,  9 Jan 2026 15:00:08 +0100 (CET)
+Date: Fri, 9 Jan 2026 15:00:08 +0100 (CET)
+From: "susta@fel.cvut.cz via KOS" <noreply@cvut.cz>
+Reply-To: susta@fel.cvut.cz
+To: yuanweiz@fel.cvut.cz
+Message-ID: <1408652377.16.1767967208369@forms12-kos.web.dmz>
+Subject: LSP - Information about the written exam
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-spamd-bar-out: ++++
+
+Tento email byl odesl=C3=A1n ze studijn=C3=ADho informa=C4=8Dn=C3=ADho syst=
+=C3=A9mu KOS.
+--------------------------------------------------------------------------
+
+Dear students!
+
+1/ The exam will take place at Karlovo n=C3=A1m=C4=9Bst=C3=AD, but in build=
+ing A, in classroom KN-A-310 on January 13, 2026.=20
+Immediately after the main reception desk, go up the stairs to the 3rd floo=
+r, and 310 is on the right. We have a time slot from 10:00 to 11:30, so we =
+must start and finish exactly on time. Please arrive a little early.
+
+2/ The exam contains eight easy questions, but from all lectures, including=
+ the last two.
+
+3/ If you look at previous exams, you will find that four types of examples=
+ are repeated regularly, just with different values each time. All examples=
+ are described in SEL (Solved Examples from LSP Written Tests), along with =
+sample solutions. See Moodle at the beginning of the "Self-study opportunit=
+ies" section for the PDF "Solved Examples from LSP Written Tests".
+
+a) Signed and Unsigned value of bit number: SEL pg. 2 and 3
+
+b) The same logic functions:  SEL from 4 to 7 - You must solve using Karnau=
+gh maps, not by substituting values, which is a path to hell.=20
+
+c+d) Simulations of a circuit with NAND and NOR RS-latch  + its conversion =
+to equations and their decomposition using Shannon expansion. SEL 11 to 14 =
+with a solved example on page 12
+
+4/ We are missing one lecture, so on Monday, January 12, 2026, i.e., the da=
+y before the exam, I will be present at Karlovo n=C3=A1m=C4=9Bst=C3=AD in m=
+y office that is near the classroom KN-E-23 from 14:30 to 19:00. I will com=
+e to the classroom upon request by your email for submitting assignments or=
+ consultations. Of course, I will also correct all tasks uploaded to DCENET=
+ on Monday.
+
+Regards Richard =C5=A0usta
+
+P.S. This year, jump predictors and cache memory were covered very briefly.=
+ Thus, on the written exams, there will be no questions on calculating erro=
+neous predictions and cache misses, i.e., SEL 17 and beyond.=20
+However, you may encounter a question about the processor pipelines.

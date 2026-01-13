@@ -1,0 +1,13 @@
+v 4
+file . "../testbenchV2_LCDlogic.vhd" "2b169d340ddde622ae562f81cf9c8bd72653824d" "20251111153657.424":
+  entity testbenchv2_lcdlogic at 16( 836) + 0 on 21;
+  architecture testbench of testbenchv2_lcdlogic at 24( 1096) + 0 on 22;
+file . "../H_Star.vhd" "792285a4e9bb4396224a622ec62945ab85ccbaff" "20251111153656.876":
+  entity h_star at 11( 674) + 0 on 17;
+  architecture rtl of h_star at 18( 945) + 0 on 18;
+file . "../LCDpackV2.vhd" "f7e6b684dd4cddc4610dd277662b7be11e2d79e3" "20251111153656.774":
+  package lcdpackv2 at 11( 653) + 0 on 15 body;
+  package body lcdpackv2 at 98( 4484) + 0 on 16;
+file . "../LCDlogic0.vhd" "208ad4647b33f29e44ce0839924069d2b7a64038" "20251111153657.366":
+  entity lcdlogic0 at 5( 155) + 0 on 19;
+  architecture behavioral of lcdlogic0 at 16( 899) + 0 on 20;
