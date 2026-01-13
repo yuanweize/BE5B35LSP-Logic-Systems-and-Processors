@@ -1,4 +1,5 @@
 # LSP Exam 2019 - 题目与答案
+> ✅ **本文件包含官方答案 (Official Answers Included)**
 
 ---
 
