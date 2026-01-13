@@ -2,17 +2,18 @@
 
 > **课程**: LSP (Logické systémy a procesory) - Logic Systems and Processors  
 > **学校**: CTU FEL Prague (捷克理工大学电气工程学院)  
-> **更新**: 2026年1月
+> **更新**: 2026年1月13日
 
 ---
 
 ## 📚 仓库简介
 
 本仓库包含CTU FEL LSP课程的完整学习资料，包括：
-- 📝 历年考试真题与答案
+- 📝 历年考试真题与答案 (2015-2025)
 - 📖 课程笔记与复习指南
 - 🔧 实验任务与FPGA项目
 - 📊 练习题与例题集
+- 🎯 **V3.0 学渣逆袭手册** (LaTeX考前突击)
 
 ---
 
@@ -20,24 +21,47 @@
 
 ```
 LSP/
-├── EXAM/                    # 📝 考试资料
-│   ├── 2021-2025考试真题    # 历年考试.md + .pdf
-│   ├── 参考资料             # 例题集、复习指南
-│   ├── STUDOCU/             # 早期考试(2015-2019)
-│   └── README.md            # 考试资料说明
+├── EXAM/                           # 📝 考试资料
+│   ├── LSP_Revision_Master_2026/   # 🎯 V3.0 学渣逆袭LaTeX手册
+│   │   ├── chapters/               # 分章节内容
+│   │   ├── lsp-exam.cls            # 自定义文档类
+│   │   ├── main.tex                # 主文件
+│   │   └── Makefile                # 自动编译
+│   ├── 2015-2025_Exam*.md          # 历年考试真题 (21份)
+│   ├── LSP_终极复习指南.md          # 终极复习指南
+│   ├── LSP_Exam_Methodology_Mastery.md  # 方法论精通
+│   ├── 精选例题集_SelectedExamples.md   # 精选例题V2.1
+│   ├── 📚完整学习索引.md            # 完整索引
+│   └── README.md                   # 考试资料说明
 │
-├── TASK/                    # 🔧 实验任务
-│   ├── 1/                   # 任务1
-│   ├── 2/task2/             # 任务2 - FPGA项目(Quartus)
-│   └── 3/                   # 任务3 - LCD显示
+├── TASK/                           # 🔧 实验任务
+│   ├── 1/                          # Task1 - 广告牌
+│   ├── 2/task2/                    # Task2 - Morse信标 (Quartus)
+│   ├── 3/                          # Task3 - LCD显示
+│   └── STUDOCU/                    # Studocu任务资料
 │
-├── WEEK1-13/                # 📖 每周课程笔记
+├── WEEK1-13/                       # 📖 每周课程笔记
+│   ├── WEEK1/  - 入门与控制面板
+│   ├── WEEK2/  - 逻辑函数
+│   ├── WEEK3/  - VHDL并发语句
+│   ├── WEEK4/  - VHDL进阶
+│   ├── WEEK5/  - LCD与Process
+│   ├── WEEK6/  - CMOS与仿真
+│   ├── WEEK7/  - 存储器与DFF
+│   ├── WEEK8/  - 定点数与亚稳态
+│   ├── WEEK9/  - 有限状态机
+│   ├── WEEK10/ - 控制单元FSA
+│   ├── WEEK11/ - RISC-V处理器
+│   ├── WEEK12/ - Cache缓存
+│   └── WEEK13/ - 流水线ALU
 │
-├── STUDOCU/                 # 📚 Studocu资料
-│   ├── EXAM/                # 考试相关
-│   └── TASK/                # 任务相关
+├── tools/                          # 🛠️ 工具脚本
+│   ├── md2pdf.py                   # Markdown转PDF
+│   └── batch_convert.py            # 批量转换
 │
-└── README.md                # 本文件
+├── BinaryPrerequisite_V20.pdf      # 二进制预备知识
+├── LogicCircuitsOnFPGAs.pdf        # FPGA逻辑电路
+└── README.md                       # 本文件
 ```
 
 ---
@@ -68,27 +92,33 @@ LSP/
 - RTL视图分析
 
 ### 5️⃣ 计算机体系结构
-- 分支预测（1位/2位预测器）
-- Cache缓存（直接映射/组相联）
-- 流水线基础
+- 处理器流水线 (5级)
+- 数据冒险与Forwarding
+- ~~分支预测~~ (本次不考)
+- ~~Cache缓存~~ (本次不考)
 
 ---
 
-## 📝 考试信息
+## 📝 考试信息 (2026年1月)
 
 | 项目 | 说明 |
 |------|------|
+| 日期 | 2026年1月13日 10:00 |
+| 地点 | KN-A-310 |
 | 时长 | 90分钟 |
 | 题数 | 8-9道 |
 | 语言 | 捷克语/英语 |
-| 形式 | 笔试 |
-| 及格 | 两部分各需≥9分 |
 
-### ⭐ 必考题型
-1. RS锁存器仿真
-2. Shannon展开
-3. 等价逻辑函数
-4. 有符号/无符号运算
+### ⭐ 2026年必考题型 (老师确认)
+1. 有符号/无符号数运算
+2. K-Map等价逻辑函数
+3. RS锁存器波形分析
+4. 香农展开
+5. 处理器流水线
+
+### ❌ 本次不考
+- ~~分支预测器~~
+- ~~Cache计算~~
 
 详见 [EXAM/README.md](EXAM/README.md)
 

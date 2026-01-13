@@ -1,196 +1,133 @@
 % ==============================================================================
-% 第三章: RS锁存器与香农展开 - 详细推导
+% 第三章: RS锁存器 + 香农展开 - 交通灯法则
 % ==============================================================================
-\section{RS锁存器与香农展开}
+\section{RS锁存器 (交通灯法则)}
 
-\subsection{RS锁存器基础}
+\begin{hack}[NOR门RS - 高电平有效]
+\textbf{红绿灯记忆法：}
+\begin{itemize}
+\item $S=1$ $\to$ $Q$变1 (Set=设置)
+\item $R=1$ $\to$ $Q$变0 (Reset=清零)
+\item 都是0 $\to$ \textbf{抄前一个状态}
+\item 都是1 $\to$ 写``禁止''或``不稳定''
+\end{itemize}
+\end{hack}
 
-\begin{formula}[RS锁存器真值表]
+\begin{hack}[NAND门RS - 低电平有效]
+\textbf{反过来！}
+\begin{itemize}
+\item $\bar{S}=0$ $\to$ $Q$变1
+\item $\bar{R}=0$ $\to$ $Q$变0
+\item 都是1 $\to$ \textbf{抄前一个状态}
+\item 都是0 $\to$ 禁止
+\end{itemize}
+\end{hack}
+
+\subsection{RS真值表 (必背)}
+
 \begin{center}
 \begin{tabular}{|cc|c|l|}
 \hline
-\textbf{S} & \textbf{R} & \textbf{Q(next)} & \textbf{状态} \\
+\textbf{S} & \textbf{R} & \textbf{Q} & \textbf{怎么写} \\
 \hline
-0 & 0 & Q & 保持 \\
-0 & 1 & 0 & 复位 \\
-1 & 0 & 1 & 置位 \\
-1 & 1 & ? & 禁止/不稳定 \\
-\hline
-\end{tabular}
-\end{center}
-
-\textbf{特征方程:} $Q_{next} = S + \bar{R}Q$ (约束: $SR = 0$)
-\end{formula}
-
-\begin{pitfall}[S=R=1 的问题]
-当 $S=R=1$ 时:
-\begin{itemize}
-\item NOR型锁存器: $Q=\bar{Q}=0$ (矛盾!)
-\item NAND型锁存器: $Q=\bar{Q}=1$ (矛盾!)
-\item 释放后状态不确定 (竞争条件)
-\end{itemize}
-\textbf{考试中:} 通常标记为"禁止"或"不稳定"
-\end{pitfall}
-
-\subsection{NOR型 vs NAND型}
-
-\begin{algorithm}[两种RS锁存器对比]
-\textbf{NOR型RS锁存器:}
-\begin{itemize}
-\item $Q = \overline{R + \bar{Q}}$
-\item $\bar{Q} = \overline{S + Q}$
-\item 高电平有效 (S=1置位, R=1复位)
-\item 禁止态: S=R=1
-\end{itemize}
-
-\textbf{NAND型RS锁存器:}
-\begin{itemize}
-\item $Q = \overline{\bar{S} \cdot \bar{Q}}$
-\item 低电平有效 ($\bar{S}$=0置位, $\bar{R}$=0复位)
-\item 禁止态: $\bar{S}$=$\bar{R}$=0
-\end{itemize}
-\end{algorithm}
-
-\subsection{RS锁存器状态分析}
-
-\begin{example}[典型例题: 状态序列分析]
-\textbf{给定:} NOR型RS锁存器，初始 $Q=0$
-
-\textbf{输入序列:} $(S,R) = (1,0) \to (0,0) \to (0,1) \to (0,0) \to (1,1)$
-
-\textbf{Step-by-Step分析:}
-
-\begin{center}
-\small
-\begin{tabular}{|c|cc|c|l|}
-\hline
-\textbf{时刻} & \textbf{S} & \textbf{R} & \textbf{Q} & \textbf{说明} \\
-\hline
-$t_0$ & - & - & 0 & 初始状态 \\
-$t_1$ & 1 & 0 & 1 & 置位: $Q \to 1$ \\
-$t_2$ & 0 & 0 & 1 & 保持: $Q$ 不变 \\
-$t_3$ & 0 & 1 & 0 & 复位: $Q \to 0$ \\
-$t_4$ & 0 & 0 & 0 & 保持: $Q$ 不变 \\
-$t_5$ & 1 & 1 & ? & 禁止态 \\
+0 & 0 & Q & 抄上一个 \\
+0 & 1 & 0 & 写0 \\
+1 & 0 & 1 & 写1 \\
+1 & 1 & ? & 写``禁止'' \\
 \hline
 \end{tabular}
 \end{center}
-\end{example}
 
-% ==============================================================================
-\subsection{香农展开 - 核心考点}
-% ==============================================================================
+\subsection{波形分析做题法}
 
-\begin{formula}[香农展开定理]
-任意布尔函数 $F(x_1, x_2, ..., x_n)$ 可以对变量 $x_i$ 展开:
-\[
-F = x_i \cdot F_{x_i=1} + \bar{x_i} \cdot F_{x_i=0}
-\]
-
-其中:
-\begin{itemize}
-\item $F_{x_i=1}$ = 将 $x_i$ 代入1后的子函数 (正因子)
-\item $F_{x_i=0}$ = 将 $x_i$ 代入0后的子函数 (负因子)
-\end{itemize}
-\end{formula}
-
-\begin{algorithm}[香农展开步骤 (手把手)]
-\textbf{目标:} 对 $F(A,B,C)$ 关于变量 $A$ 进行香农展开
-
-\textbf{步骤:}
+\begin{hack}[波形题三步走]
 \begin{enumerate}
-\item 计算正因子: 令 $A=1$，得到 $F_1 = F|_{A=1}$
-\item 计算负因子: 令 $A=0$，得到 $F_0 = F|_{A=0}$
-\item 组合结果: $F = A \cdot F_1 + \bar{A} \cdot F_0$
+\item 在S和R波形上\textbf{画竖线}标出每个变化点
+\item 每段时间看S和R的值
+\item 按真值表填Q的值
 \end{enumerate}
-\end{algorithm}
 
-\begin{example}[香农展开完整例题]
-\textbf{题目:} 对 $F = AB + \bar{A}C + BC$ 关于 $A$ 进行香农展开
+\textbf{口诀：}S高Q高，R高Q低，都低抄前面！
+\end{hack}
 
-\textbf{Step 1: 计算正因子 $F_1$ (令 $A=1$)}
-\begin{align*}
-F_1 &= F|_{A=1} \\
-&= (1)B + \overline{(1)}C + BC \\
-&= B + 0 \cdot C + BC \\
-&= B + BC \\
-&= B \quad \text{(吸收律)}
-\end{align*}
+% ==============================================================================
+\section{香农展开 (复制粘贴法)}
+% ==============================================================================
 
-\textbf{Step 2: 计算负因子 $F_0$ (令 $A=0$)}
-\begin{align*}
-F_0 &= F|_{A=0} \\
-&= (0)B + \overline{(0)}C + BC \\
-&= 0 + 1 \cdot C + BC \\
-&= C + BC \\
-&= C \quad \text{(吸收律)}
-\end{align*}
-
-\textbf{Step 3: 组合香农展开式}
+\begin{hack}[香农展开 - 复制粘贴！]
+\textbf{不要推导！直接套公式：}
 \[
-\boxed{F = A \cdot B + \bar{A} \cdot C}
+F = \bar{A} \cdot F_0 + A \cdot F_1
 \]
 
-\textbf{验证:} 展开结果 $AB + \bar{A}C$
+\textbf{三步操作：}
+\begin{enumerate}
+\item $F_0$：把式子里的$A$全部\textbf{擦掉换成0}
+\item $F_1$：把式子里的$A$全部\textbf{擦掉换成1}
+\item 套公式写答案
+\end{enumerate}
+\end{hack}
 
-原式 $AB + \bar{A}C + BC$ 可化简:
+\subsection{香农展开实战}
+
+\begin{example}[例：$F = AB + \bar{A}C + BC$，对A展开]
+\textbf{Step 1: 算$F_0$ (A=0)}
+
+把$A$换成0，$\bar{A}$换成1：
 \begin{align*}
-&= AB + \bar{A}C + BC(A + \bar{A}) \\
-&= AB + \bar{A}C + ABC + \bar{A}BC \\
-&= AB(1+C) + \bar{A}C(1+B) \\
-&= AB + \bar{A}C \quad \checkmark
+F_0 &= (0)B + (1)C + BC \\
+    &= 0 + C + BC \\
+    &= C \quad \text{(吸收律)}
 \end{align*}
-\end{example}
 
-\subsection{多变量香农展开}
+\textbf{Step 2: 算$F_1$ (A=1)}
 
-\begin{algorithm}[多变量展开]
-对两个变量 $A, B$ 同时展开:
+把$A$换成1，$\bar{A}$换成0：
+\begin{align*}
+F_1 &= (1)B + (0)C + BC \\
+    &= B + 0 + BC \\
+    &= B \quad \text{(吸收律)}
+\end{align*}
+
+\textbf{Step 3: 套公式}
 \[
-F = AB \cdot F_{11} + A\bar{B} \cdot F_{10} + \bar{A}B \cdot F_{01} + \bar{A}\bar{B} \cdot F_{00}
-\]
-
-其中 $F_{ij} = F|_{A=i, B=j}$
-\end{algorithm}
-
-\begin{example}[两变量香农展开]
-\textbf{题目:} 对 $F = ABC + \bar{A}\bar{B}C + A\bar{C}$ 关于 $A,B$ 展开
-
-\textbf{计算四个因子:}
-\begin{itemize}
-\item $F_{11} = F|_{A=1,B=1} = (1)(1)C + 0 + (1)\bar{C} = C + \bar{C} = 1$
-\item $F_{10} = F|_{A=1,B=0} = 0 + 0 + \bar{C} = \bar{C}$
-\item $F_{01} = F|_{A=0,B=1} = 0 + 0 + 0 = 0$
-\item $F_{00} = F|_{A=0,B=0} = 0 + (1)(1)C + 0 = C$
-\end{itemize}
-
-\textbf{结果:}
-\[
-F = AB \cdot 1 + A\bar{B} \cdot \bar{C} + \bar{A}B \cdot 0 + \bar{A}\bar{B} \cdot C
-\]
-\[
-\boxed{F = AB + A\bar{B}\bar{C} + \bar{A}\bar{B}C}
+\boxed{F = \bar{A} \cdot C + A \cdot B}
 \]
 \end{example}
 
-\subsection{香农展开与MUX实现}
-
-\begin{keybox}[用MUX实现布尔函数]
-香农展开直接对应 2:1 MUX:
+\begin{hack}[吸收律速记]
 \begin{itemize}
-\item 选择信号 = 展开变量
-\item $I_0$ 输入 = 负因子 $F_0$
-\item $I_1$ 输入 = 正因子 $F_1$
+\item $X + XY = X$ (有大的就不要小的)
+\item $X + \bar{X}Y = X + Y$ (互补相加)
 \end{itemize}
+\end{hack}
 
-\textbf{级联:} 对每个因子继续展开 $\to$ 多级MUX树
+\subsection{两变量香农展开}
+
+\begin{hack}[对AB同时展开]
+\textbf{公式：}
+\[
+F = \bar{A}\bar{B}F_{00} + \bar{A}BF_{01} + A\bar{B}F_{10} + ABF_{11}
+\]
+
+\textbf{操作：}分别代入(A,B)=(0,0), (0,1), (1,0), (1,1)
+\end{hack}
+
+\subsection{香农展开做MUX}
+
+\begin{keybox}[香农 = 2:1 MUX]
+$F = \bar{A} \cdot F_0 + A \cdot F_1$ 直接对应：
+\begin{itemize}
+\item 选择信号 = $A$
+\item 输入0 = $F_0$
+\item 输入1 = $F_1$
+\end{itemize}
 \end{keybox}
 
-\begin{pitfall}[香农展开常见错误]
+\begin{pitfall}[香农展开易错点]
 \begin{itemize}
-\item 代入时忘记处理 $\bar{A}$ (应变成1或0)
-\item 化简时漏掉吸收律
-\item MUX输入接反 ($F_0$ 和 $F_1$ 位置)
-\item 多变量展开时因子数量算错 ($2^n$ 个)
+\item $\bar{A}$代入0时变成1，别搞反！
+\item 化简时别忘了吸收律
+\item MUX的$I_0$接$F_0$，$I_1$接$F_1$，顺序别错
 \end{itemize}
 \end{pitfall}

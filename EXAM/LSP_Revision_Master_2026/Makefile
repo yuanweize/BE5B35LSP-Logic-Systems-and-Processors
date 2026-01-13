@@ -3,7 +3,7 @@
 # 日期: 2026年1月13日
 
 # 主文件名（不含扩展名）
-MAIN = main
+MAIN = LSP_Revision_Master_2026
 
 # LaTeX 编译器
 LATEX = xelatex

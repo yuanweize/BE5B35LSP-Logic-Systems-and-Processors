@@ -1,52 +1,35 @@
 % ==============================================================================
-% 第二章: 布尔代数与卡诺图 - 实战演算
+% 第二章: 卡诺图 - 找茬游戏
 % ==============================================================================
-\section{布尔代数与K-Map}
+\section{卡诺图 (找茬游戏)}
 
-\subsection{布尔代数速查}
-
-\begin{formula}[核心定律]
-\begin{tabular}{ll}
-\textbf{幂等律:} & $A + A = A$, $A \cdot A = A$ \\
-\textbf{补余律:} & $A + \bar{A} = 1$, $A \cdot \bar{A} = 0$ \\
-\textbf{吸收律:} & $A + AB = A$, $A(A+B) = A$ \\
-\textbf{德摩根:} & $\overline{A+B} = \bar{A}\bar{B}$, $\overline{AB} = \bar{A}+\bar{B}$ \\
-\textbf{异或:} & $A \oplus B = A\bar{B} + \bar{A}B$ \\
-\end{tabular}
-\end{formula}
-
-\subsection{卡诺图 - 4变量标准模板}
-
-\begin{algorithm}[K-Map绘制步骤]
+\begin{hack}[K-Map就是找茬游戏！]
+\textbf{三步走：}
 \begin{enumerate}
-\item 确定变量排列: 行 = $AB$, 列 = $CD$ (格雷码!)
-\item 标注格雷码顺序: 00, 01, 11, 10
-\item 填入真值表中的1
-\item 圈相邻的1 (大小必须是2的幂)
-\item 写出最简SOP
+\item \textbf{填图}：看到变量就填1
+\item \textbf{圈图}：把1圈起来(越大越好)
+\item \textbf{写式}：圈里不变的变量写出来
 \end{enumerate}
-\end{algorithm}
+\end{hack}
+
+\subsection{4变量K-Map模板 (照着画!)}
 
 \begin{center}
-\textbf{4变量K-Map模板 (格雷码标注)}
-\vspace{3pt}
-
-\begin{tikzpicture}[scale=0.7]
-% 画格子
+\begin{tikzpicture}[scale=0.65]
 \draw (0,0) grid (4,4);
-% 标注CD (列)
+% 列标签 CD
 \node at (0.5, 4.4) {\footnotesize 00};
 \node at (1.5, 4.4) {\footnotesize 01};
 \node at (2.5, 4.4) {\footnotesize 11};
 \node at (3.5, 4.4) {\footnotesize 10};
 \node at (2, 4.9) {\footnotesize $CD$};
-% 标注AB (行)
+% 行标签 AB
 \node at (-0.4, 3.5) {\footnotesize 00};
 \node at (-0.4, 2.5) {\footnotesize 01};
 \node at (-0.4, 1.5) {\footnotesize 11};
 \node at (-0.4, 0.5) {\footnotesize 10};
 \node at (-0.9, 2) {\footnotesize $AB$};
-% 填入变量索引
+% 索引号
 \node at (0.5,3.5) {\tiny 0};
 \node at (1.5,3.5) {\tiny 1};
 \node at (2.5,3.5) {\tiny 3};
@@ -66,107 +49,106 @@
 \end{tikzpicture}
 \end{center}
 
-\subsection{K-Map圈法规则}
+\textbf{格雷码顺序：00, 01, 11, 10} (背下来!)
 
-\begin{pitfall}[K-Map圈法陷阱]
+\subsection{填图口诀}
+
+\begin{hack}[看到变量往哪填？]
+\textbf{4变量ABCD的位置：}
 \begin{itemize}
-\item 圈必须是 $2^n$ 个1: 1, 2, 4, 8, 16...
-\item 圈可以跨边界(环绕)!
-\item 四角可以组成一个圈!
-\item 圈越大越好 (消去更多变量)
-\item 每个1至少被圈一次
-\item 不要重复圈 (除非必要)
+\item $A=1$：下两行 (row 11, 10)
+\item $B=1$：中间两行 (row 01, 11)
+\item $C=1$：中间两列 (col 01, 11)
+\item $D=1$：右边两列 (col 11, 10)
 \end{itemize}
-\end{pitfall}
 
-\begin{example}[K-Map实战例题]
-\textbf{化简:} $F(A,B,C,D) = \sum m(0,1,2,5,7,8,9,10,14)$
+\textbf{Not变量：} $\bar{A}$就是$A=0$的区域，取反！
+\end{hack}
 
-\textbf{Step 1: 填入K-Map}
+\subsection{圈图无脑法}
 
+\begin{hack}[四种必会的圈法]
+\textbf{1. 四角圈} = $\bar{B}\bar{D}$
 \begin{center}
-\begin{tikzpicture}[scale=0.6]
+\begin{tikzpicture}[scale=0.45]
 \draw (0,0) grid (4,4);
-% 列标签
-\node at (0.5, 4.3) {\tiny 00};
-\node at (1.5, 4.3) {\tiny 01};
-\node at (2.5, 4.3) {\tiny 11};
-\node at (3.5, 4.3) {\tiny 10};
-% 行标签
-\node at (-0.3, 3.5) {\tiny 00};
-\node at (-0.3, 2.5) {\tiny 01};
-\node at (-0.3, 1.5) {\tiny 11};
-\node at (-0.3, 0.5) {\tiny 10};
-% 填入值
-\node at (0.5,3.5) {1}; % m0
-\node at (1.5,3.5) {1}; % m1
-\node at (2.5,3.5) {0}; % m3
-\node at (3.5,3.5) {1}; % m2
-\node at (0.5,2.5) {0}; % m4
-\node at (1.5,2.5) {1}; % m5
-\node at (2.5,2.5) {1}; % m7
-\node at (3.5,2.5) {0}; % m6
-\node at (0.5,1.5) {0}; % m12
-\node at (1.5,1.5) {0}; % m13
-\node at (2.5,1.5) {0}; % m15
-\node at (3.5,1.5) {1}; % m14
-\node at (0.5,0.5) {1}; % m8
-\node at (1.5,0.5) {1}; % m9
-\node at (2.5,0.5) {0}; % m11
-\node at (3.5,0.5) {1}; % m10
-% 圈1: 四角 (0,2,8,10) - 红色
-\draw[red, thick, rounded corners] (-0.1,3.9) rectangle (0.9,3.1);
-\draw[red, thick, rounded corners] (3.1,3.9) rectangle (4.1,3.1);
-\draw[red, thick, rounded corners] (-0.1,0.9) rectangle (0.9,0.1);
-\draw[red, thick, rounded corners] (3.1,0.9) rectangle (4.1,0.1);
-% 圈2: (0,1,8,9) - 蓝色
-\draw[blue, thick, rounded corners] (-0.05,3.85) rectangle (1.85,3.15);
-\draw[blue, thick, rounded corners] (-0.05,0.85) rectangle (1.85,0.15);
-% 圈3: (5,7) - 绿色
-\draw[green!60!black, thick, rounded corners] (1.15,2.85) rectangle (2.85,2.15);
-% 圈4: (14) - 单独
-\draw[orange, thick, rounded corners] (3.15,1.85) rectangle (3.85,1.15);
+\node at (0.5,3.5) {1}; \node at (3.5,3.5) {1};
+\node at (0.5,0.5) {1}; \node at (3.5,0.5) {1};
+\draw[red,thick] (0.1,3.1) rectangle (0.9,3.9);
+\draw[red,thick] (3.1,3.1) rectangle (3.9,3.9);
+\draw[red,thick] (0.1,0.1) rectangle (0.9,0.9);
+\draw[red,thick] (3.1,0.1) rectangle (3.9,0.9);
 \end{tikzpicture}
 \end{center}
 
-\textbf{Step 2: 识别圈}
-\begin{itemize}
-\item \textcolor{red}{圈1 (四角):} m(0,2,8,10) $\to$ $\bar{B}\bar{D}$
-\item \textcolor{blue}{圈2 (跨边):} m(0,1,8,9) $\to$ $\bar{B}\bar{C}$
-\item \textcolor{green!60!black}{圈3:} m(5,7) $\to$ $\bar{A}BD$
-\item \textcolor{orange}{圈4:} m(14) $\to$ $AB\bar{C}D$
-\end{itemize}
+\textbf{2. 一整行} = 只有AB变
+\begin{center}
+\begin{tikzpicture}[scale=0.45]
+\draw (0,0) grid (4,4);
+\node at (0.5,2.5) {1}; \node at (1.5,2.5) {1};
+\node at (2.5,2.5) {1}; \node at (3.5,2.5) {1};
+\draw[blue,thick,rounded corners] (0.1,2.1) rectangle (3.9,2.9);
+\end{tikzpicture}
+\end{center}
 
-\textbf{Step 3: 写出最简式}
-\[
-F = \bar{B}\bar{D} + \bar{B}\bar{C} + \bar{A}BD + AB\bar{C}D
-\]
-\end{example}
+\textbf{3. 田字格(4个)} = 消两个变量
 
-\subsection{POS形式化简}
+\textbf{4. 上下卷/左右卷} = 可以跨边界！
+\end{hack}
 
-\begin{algorithm}[POS化简步骤]
+\subsection{圈图规则}
+
+\begin{pitfall}[圈图三铁律]
 \begin{enumerate}
-\item 在K-Map中圈0 (不是圈1!)
-\item 对每个圈写出maxterm
-\item maxterm是变量的OR
-\item 结果是所有maxterm的AND
+\item 圈的大小必须是 \textbf{2的幂}：1,2,4,8,16
+\item 圈\textbf{越大越好}(消去更多变量)
+\item 每个1\textbf{至少被圈一次}
 \end{enumerate}
+\end{pitfall}
 
-\textbf{技巧:} 圈0时，变量取值与SOP相反:
+\subsection{从圈写表达式}
+
+\begin{hack}[圈里不变的写出来！]
+\textbf{看圈内的变量值：}
 \begin{itemize}
-\item 变量=0 $\to$ 写变量本身
-\item 变量=1 $\to$ 写变量的补
+\item 变量全是1 $\to$ 写变量本身
+\item 变量全是0 $\to$ 写变量的NOT
+\item 变量有0有1 $\to$ 不写(被消掉了)
 \end{itemize}
-\end{algorithm}
 
-\subsection{Don't Care条件}
-
-\begin{keybox}[Don't Care (X) 使用]
+\textbf{例：} 圈在AB=01, CD=任意
 \begin{itemize}
-\item Don't Care可以当1用来扩大圈
-\item Don't Care也可以当0用来忽略
-\item 目标: 让圈尽可能大
-\item 最终表达式中不包含X
+\item A全是0 $\to$ 写$\bar{A}$
+\item B全是1 $\to$ 写$B$
+\item CD有0有1 $\to$ 不写
+\item \textbf{结果：$\bar{A}B$}
 \end{itemize}
+\end{hack}
+
+\subsection{异或的秘密}
+
+\begin{hack}[看到棋盘格 = XOR！]
+如果K-Map里1和0像国际象棋棋盘一样交错：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+\draw (0,0) grid (2,2);
+\node at (0.5,1.5) {1}; \node at (1.5,1.5) {0};
+\node at (0.5,0.5) {0}; \node at (1.5,0.5) {1};
+\end{tikzpicture}
+\end{center}
+
+\textbf{直接写：} $A \oplus B$ (异或)
+
+这种情况\textbf{没法化简}，别浪费时间圈了！
+\end{hack}
+
+\subsection{Don't Care}
+
+\begin{keybox}[X可以当1也可以当0]
+\begin{itemize}
+\item 能让圈变大 $\to$ 当1
+\item 不能 $\to$ 当0忽略
+\end{itemize}
+目标：让圈尽量大！
 \end{keybox}
