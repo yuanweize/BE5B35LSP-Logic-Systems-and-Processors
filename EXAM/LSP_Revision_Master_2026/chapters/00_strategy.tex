@@ -1,0 +1,52 @@
+% ==============================================================================
+% 第零章: 考试策略与题型优先级表
+% ==============================================================================
+\section{考试策略速览}
+
+\begin{keybox}[考试范围确认 (来自老师邮件)]
+\textbf{必考内容:} 有符号/无符号数、K-Map化简、RS锁存器、香农展开、流水线\\
+\textbf{不考内容:} \sout{Cache计算}、\sout{分支预测器}
+\end{keybox}
+
+\subsection{题型优先级矩阵}
+
+\begin{center}
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{题型} & \textbf{分值} & \textbf{难度} & \textbf{优先级} \\
+\hline
+有符号/无符号转换 & 10-15 & 低 & [S+] 必拿 \\
+\hline
+K-Map 4变量 & 12-18 & 中 & [S] 必拿 \\
+\hline
+RS锁存器状态分析 & 8-12 & 中 & [A] 高分 \\
+\hline
+香农展开推导 & 10-15 & 中高 & [A] 高分 \\
+\hline
+流水线Hazard分析 & 15-20 & 中高 & [A] 高分 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{时间分配建议 (90分钟)}
+
+\begin{algorithm}[时间分配策略]
+\begin{enumerate}
+\item \textbf{数值系统题} (15分钟): 快速完成，不要犯低级错误
+\item \textbf{K-Map题} (20分钟): 画图仔细，检查圈是否正确
+\item \textbf{RS锁存器/香农} (25分钟): 按步骤推导，写清楚过程
+\item \textbf{流水线题} (25分钟): 画时序图，标注Hazard
+\item \textbf{检查} (5分钟): 检查数值计算和符号
+\end{enumerate}
+\end{algorithm}
+
+\begin{pitfall}[考场常见失分点]
+\begin{itemize}
+\item 有符号数忘记考虑符号扩展
+\item K-Map圈的大小不是2的幂次
+\item RS锁存器S=R=1的不稳定状态处理
+\item 香农展开时代入0/1方向搞反
+\item 流水线Forwarding路径画错
+\end{itemize}
+\end{pitfall}
