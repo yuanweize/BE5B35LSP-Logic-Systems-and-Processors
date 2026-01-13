@@ -1,238 +1,161 @@
 % ==============================================================================
-% 第四章: 处理器流水线 - 重点考点
+% 第四章: 流水线 - 连连看
 % ==============================================================================
-\section{处理器流水线}
+\section{流水线 (连连看)}
 
-\subsection{流水线基础}
+\begin{hack}[流水线关键词匹配]
+\textbf{看到题目关键词，直接连答案：}
 
-\begin{formula}[流水线阶段 (5级经典)]
 \begin{center}
-\begin{tabular}{|c|l|l|}
+\begin{tabular}{|l|l|}
 \hline
-\textbf{阶段} & \textbf{全称} & \textbf{功能} \\
+\textbf{题目说} & \textbf{答案写} \\
+\hline
+Data Hazard & Forwarding \\
+\hline
+Load-Use & Stall (气泡) \\
+\hline
+Branch/Jump & Flush (冲刷) \\
+\hline
+Structural & 加硬件 \\
+\hline
+\end{tabular}
+\end{center}
+\end{hack}
+
+\subsection{5级流水线 (背下来)}
+
+\begin{formula}[五个阶段]
+\begin{center}
+\texttt{IF $\to$ ID $\to$ EX $\to$ MEM $\to$ WB}
+\end{center}
+
+\begin{tabular}{|c|l|l|}
 \hline
 IF & Instruction Fetch & 取指令 \\
 ID & Instruction Decode & 译码/读寄存器 \\
-EX & Execute & 执行/ALU计算 \\
-MEM & Memory Access & 访存 \\
-WB & Write Back & 写回寄存器 \\
+EX & Execute & ALU计算 \\
+MEM & Memory & 访存 \\
+WB & Write Back & 写回 \\
 \hline
 \end{tabular}
-\end{center}
 \end{formula}
 
-\subsection{流水线时序图}
+\subsection{流水线时序图模板}
 
-\begin{example}[流水线执行时序]
-\textbf{指令序列:} I1, I2, I3, I4, I5
+\begin{hack}[画图照着抄！]
+\begin{verbatim}
+     C1  C2  C3  C4  C5  C6  C7
+I1   IF  ID  EX  MEM WB
+I2       IF  ID  EX  MEM WB
+I3           IF  ID  EX  MEM WB
+I4               IF  ID  EX  MEM WB
+\end{verbatim}
 
-\begin{center}
-\small
-\texttt{%
-\begin{tabular}{l|ccccccccc}
-     & C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 \\
-\hline
-I1 & IF & ID & EX & MEM & WB &    &    &    &    \\
-I2 &    & IF & ID & EX & MEM & WB &    &    &    \\
-I3 &    &    & IF & ID & EX & MEM & WB &    &    \\
-I4 &    &    &    & IF & ID & EX & MEM & WB &    \\
-I5 &    &    &    &    & IF & ID & EX & MEM & WB \\
-\end{tabular}
-}
-\end{center}
+\textbf{规律：}每条指令往右错一格
+\end{hack}
 
-\textbf{性能:} 5条指令用9个周期 (理想情况)
-\end{example}
+\subsection{三种Hazard}
 
-\subsection{流水线Hazard分类}
-
-\begin{keybox}[三类Hazard]
-\textbf{1. 结构冲突 (Structural Hazard):}
+\begin{keybox}[Hazard分类]
+\textbf{1. 结构冲突 (Structural):}
 \begin{itemize}
-\item 硬件资源不足 (如单端口内存)
-\item 解决: 增加硬件资源
+\item 硬件不够用 (如只有一个内存端口)
+\item 解决：加硬件
 \end{itemize}
 
-\textbf{2. 数据冲突 (Data Hazard):}
+\textbf{2. 数据冲突 (Data):}
 \begin{itemize}
-\item RAW (Read After Write) - 最常见
-\item WAW (Write After Write)
-\item WAR (Write After Read)
+\item 后面指令要用前面还没算完的数据
+\item 解决：Forwarding 或 Stall
 \end{itemize}
 
-\textbf{3. 控制冲突 (Control Hazard):}
+\textbf{3. 控制冲突 (Control):}
 \begin{itemize}
-\item 分支指令导致
-\item 解决: 预测/延迟槽/Stall
+\item 分支跳转导致取错指令
+\item 解决：Flush/预测
 \end{itemize}
 \end{keybox}
 
-\subsection{数据冲突详解}
+\subsection{RAW冲突}
 
-\begin{algorithm}[RAW冲突检测]
-\textbf{条件:} 指令 $I_j$ 读取指令 $I_i$ 要写的寄存器，且 $I_i$ 还没写回
-
-\textbf{例:}
+\begin{hack}[RAW冲突检测]
+\textbf{看寄存器！}
 \begin{verbatim}
-I1: ADD R1, R2, R3   ; 写 R1
-I2: SUB R4, R1, R5   ; 读 R1 <- RAW!
+I1: ADD R1, R2, R3   ; 写R1
+I2: SUB R4, R1, R5   ; 读R1 <- RAW!
 \end{verbatim}
 
-\textbf{时序分析:}
-\begin{itemize}
-\item I1 在 C5(WB) 才写回 R1
-\item I2 在 C3(ID) 就要读 R1
-\item 冲突: 读发生在写之前!
-\end{itemize}
-\end{algorithm}
+\textbf{判断方法：}后面指令读的寄存器 = 前面指令写的寄存器？
 
-\subsection{Forwarding (旁路)}
+是 $\to$ RAW冲突！
+\end{hack}
 
-\begin{formula}[Forwarding路径]
-\textbf{EX/MEM $\to$ EX:}
+\subsection{Forwarding路径}
+
+\begin{hack}[Forwarding两条路]
+\textbf{1. EX/MEM $\to$ EX:}
 \begin{itemize}
-\item 将ALU结果直接送到下一条指令的ALU输入
-\item 解决1周期RAW冲突
+\item 前一条ALU结果直接给后一条用
+\item 解决1周期RAW
 \end{itemize}
 
-\textbf{MEM/WB $\to$ EX:}
+\textbf{2. MEM/WB $\to$ EX:}
 \begin{itemize}
-\item 将访存结果或旧ALU结果送到ALU输入
-\item 解决2周期RAW冲突
+\item 前两条的结果给当前用
+\item 解决2周期RAW
 \end{itemize}
-\end{formula}
+\end{hack}
 
-\begin{example}[Forwarding实例]
-\textbf{指令:}
+\subsection{Load-Use必须Stall}
+
+\begin{pitfall}[Forwarding救不了Load-Use！]
 \begin{verbatim}
-I1: ADD R1, R2, R3
-I2: SUB R4, R1, R5
-I3: AND R6, R1, R7
+LW  R1, 0(R2)   ; MEM阶段才有数据
+ADD R3, R1, R4  ; EX阶段就要数据
 \end{verbatim}
 
-\textbf{时序 (有Forwarding):}
-\begin{center}
-\small
-\texttt{%
-\begin{tabular}{l|ccccc}
-     & C1 & C2 & C3 & C4 & C5 \\
-\hline
-I1 & IF & ID & EX & MEM & WB \\
-I2 &    & IF & ID & EX* & MEM \\
-I3 &    &    & IF & ID & EX** \\
-\end{tabular}
-}
-\end{center}
-
-\begin{itemize}
-\item *EX: 从I1的EX/MEM寄存器forward
-\item **EX: 从I1的MEM/WB寄存器forward
-\end{itemize}
-
-\textbf{无需Stall!}
-\end{example}
-
-\subsection{Load-Use Hazard}
-
-\begin{pitfall}[Load后立即使用]
-\textbf{问题:} LW指令在MEM阶段才得到数据
-
+\textbf{必须插入1个Stall（气泡）！}
 \begin{verbatim}
-I1: LW  R1, 0(R2)   ; MEM阶段才有R1
-I2: ADD R3, R1, R4  ; EX阶段需要R1
+     C1  C2  C3  C4  C5  C6
+LW   IF  ID  EX  MEM WB
+ADD      IF  ID  --  EX  MEM
 \end{verbatim}
 
-\textbf{即使有Forwarding也必须Stall 1周期!}
-
-\begin{center}
-\small
-\texttt{%
-\begin{tabular}{l|cccccc}
-     & C1 & C2 & C3 & C4 & C5 & C6 \\
-\hline
-LW  & IF & ID & EX & MEM & WB &    \\
-ADD &    & IF & ID & -- & EX & MEM \\
-\end{tabular}
-}
-\end{center}
-
-"--" 表示插入的 Stall (气泡)
+``--''就是气泡/Stall
 \end{pitfall}
 
-\subsection{Stall与性能计算}
+\subsection{CPI计算}
 
-\begin{formula}[CPI计算]
+\begin{hack}[CPI公式]
 \[
-\text{CPI} = \text{CPI}_{ideal} + \text{Stall cycles per instruction}
+\text{CPI} = 1 + \text{Stall率}
 \]
 
-\textbf{理想CPI} = 1 (每周期完成一条指令)
-
-\textbf{实际CPI} = 1 + (数据Stall + 控制Stall)
-\end{formula}
-
-\begin{example}[性能计算例题]
-\textbf{给定:}
-\begin{itemize}
-\item 30\% 的指令是Load
-\item 50\% 的Load后面紧跟使用其结果的指令
-\item 每次Load-Use造成1周期Stall
-\end{itemize}
-
-\textbf{计算CPI:}
+\textbf{例：}30\%指令是Load，其中50\%造成Stall
 \begin{align*}
-\text{Stall率} &= 0.30 \times 0.50 = 0.15 \\
-\text{CPI} &= 1 + 0.15 \times 1 = 1.15
+\text{Stall率} &= 0.3 \times 0.5 = 0.15 \\
+\text{CPI} &= 1 + 0.15 = 1.15
 \end{align*}
-\end{example}
+\end{hack}
 
-\subsection{流水线性能公式}
+\subsection{加速比}
 
-\begin{formula}[吞吐量与加速比]
-\textbf{吞吐量:}
+\begin{formula}[加速比公式]
 \[
-\text{Throughput} = \frac{n \text{ instructions}}{(k + n - 1) \text{ cycles}}
-\]
-其中 $k$ = 流水线级数, $n$ = 指令数
-
-\textbf{加速比 (vs 非流水线):}
-\[
-\text{Speedup} = \frac{n \times k}{k + n - 1}
+\text{Speedup} = \frac{nk}{k + n - 1} \to k
 \]
 
-当 $n \to \infty$: Speedup $\to k$
+$k$ = 流水线级数，$n$ = 指令数
+
+当$n$很大时，加速比接近$k$倍
 \end{formula}
 
-\subsection{分支处理策略}
-
-\begin{algorithm}[分支处理方法]
-\textbf{1. Stall (最简单):}
-\begin{itemize}
-\item 等到分支结果确定再取下一条
-\item 代价: 每个分支浪费若干周期
-\end{itemize}
-
-\textbf{2. 预测不跳转:}
-\begin{itemize}
-\item 总是取顺序下一条
-\item 猜错时Flush流水线
-\end{itemize}
-
-\textbf{3. 延迟槽:}
-\begin{itemize}
-\item 分支后的指令总是执行
-\item 编译器负责填充有用指令
-\end{itemize}
-\end{algorithm}
-
-\begin{keybox}[考试重点]
-\begin{itemize}
-\item 会画流水线时序图
-\item 能识别RAW/WAW/WAR冲突
-\item 理解Forwarding路径
-\item 知道Load-Use必须Stall
-\item 计算CPI和加速比
-\end{itemize}
-
-\textbf{老师确认: 会考流水线，不考分支预测器细节}
-\end{keybox}
+\begin{hack}[流水线题目套路]
+\begin{enumerate}
+\item 画时序图
+\item 找冲突（看寄存器）
+\item 标Forwarding箭头或Stall
+\item 算CPI
+\end{enumerate}
+\end{hack}

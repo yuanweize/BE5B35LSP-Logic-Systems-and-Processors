@@ -1,9 +1,9 @@
 % ==============================================================================
-% LSP EXAM V2.0 - 高密度战斗手册样式
-% 考前10小时突击专用 | 双栏紧凑排版
+% LSP EXAM V3.0 - 学渣逆袭·无脑做题版
+% 考前10小时 | 不问为什么，只管怎么做
 % ==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{lsp-exam}[2026/01/13 LSP Exam V2.0 High-Density Style]
+\ProvidesClass{lsp-exam}[2026/01/13 LSP Exam V3.0 Brainless Hack Edition]
 
 % 基于article双栏布局
 \LoadClass[10pt, a4paper, twocolumn]{article}
@@ -56,11 +56,13 @@
 \definecolor{pitfallred}{RGB}{178, 34, 34}
 \definecolor{formulagray}{RGB}{64, 64, 64}
 \definecolor{keyboxorange}{RGB}{255, 140, 0}
+\definecolor{hackmagenta}{RGB}{200, 0, 150}
 \definecolor{lightbluebg}{RGB}{240, 248, 255}
 \definecolor{lightgreenbg}{RGB}{240, 255, 240}
 \definecolor{lightredbg}{RGB}{255, 245, 245}
 \definecolor{lightgraybg}{RGB}{248, 248, 248}
 \definecolor{lightorangebg}{RGB}{255, 250, 240}
+\definecolor{lightmagentabg}{RGB}{255, 230, 250}
 
 % ==============================================================================
 % tcolorbox 模块化环境定义
@@ -137,6 +139,23 @@
 }
 
 % ==============================================================================
+% V3.0 新增：无脑大招环境 (洋红色/紫色) - 最醒目！
+% ==============================================================================
+\newtcolorbox{hack}[1][]{
+    enhanced,
+    colback=lightmagentabg,
+    colframe=hackmagenta,
+    fonttitle=\bfseries\sffamily\large,
+    title={[HACK] #1},
+    boxrule=1.5pt,
+    arc=3pt,
+    left=4pt, right=4pt, top=3pt, bottom=3pt,
+    before skip=6pt, after skip=6pt,
+    breakable,
+    shadow={1mm}{-1mm}{0mm}{hackmagenta!30}
+}
+
+% ==============================================================================
 % 紧凑列表设置
 % ==============================================================================
 \setlist{nosep, leftmargin=*, labelindent=0pt}
@@ -166,8 +185,8 @@
 % ==============================================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily LSP考前突击手册 V2.0}
-\fancyhead[R]{\small\sffamily 2026-01-13 | 10:00-11:30}
+\fancyhead[L]{\small\sffamily\color{hackmagenta} LSP V3.0 学渣逆袭版}
+\fancyhead[R]{\small\sffamily 2026-01-13 | 10:00}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 

@@ -1,44 +1,50 @@
 % ==============================================================================
-% 第五章: A4速查表 (打印用)
+% 第五章: 作弊条 - 所有无脑公式汇总
 % ==============================================================================
-\section{速查表}
+\section{作弊条 (考前看这页)}
 
-\subsection{数值系统}
+\subsection{2的幂次表}
 
 \begin{center}
-\small
-\begin{tabular}{|l|l|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{概念} & \textbf{公式/规则} \\
+$2^4$ & $2^5$ & $2^6$ & $2^7$ & $2^8$ & $2^9$ & $2^{10}$ & $2^{16}$ \\
 \hline
-$n$位无符号范围 & $[0, 2^n-1]$ \\
-$n$位有符号范围 & $[-2^{n-1}, 2^{n-1}-1]$ \\
-负数补码 & $-X \to 2^n - X$ \\
-补码转值 & $-b_{n-1} \cdot 2^{n-1} + \sum b_i \cdot 2^i$ \\
-符号扩展 & 复制MSB \\
-溢出条件 & 正+正=负 或 负+负=正 \\
+16 & 32 & 64 & 128 & 256 & 512 & 1024 & 65536 \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{卡诺图}
+\subsection{数值范围}
 
 \begin{center}
-\small
-\begin{tabular}{|l|l|}
+\begin{tabular}{|c|c|c|}
 \hline
-\textbf{规则} & \textbf{说明} \\
+位数 & Unsigned & Signed \\
 \hline
-格雷码顺序 & 00, 01, 11, 10 \\
-圈大小 & 必须是$2^n$ (1,2,4,8...) \\
-环绕 & 左右/上下边可连 \\
-四角 & 可组成一个圈 \\
-Don't Care & 可当1扩大圈 \\
+8 & 0$\sim$255 & $-128\sim+127$ \\
+10 & 0$\sim$1023 & $-512\sim+511$ \\
+16 & 0$\sim$65535 & $-32768\sim+32767$ \\
 \hline
 \end{tabular}
 \end{center}
 
-\textbf{4变量索引:}
+\subsection{数值计算速查}
+
+\begin{center}
+\fbox{\parbox{0.9\linewidth}{
+\textbf{Unsigned溢出：} 结果 \% $2^N$
+
+\textbf{Signed溢出：} 结果 $> 2^{N-1}-1$？减$2^N$
+
+\textbf{负数补码：} $2^N - |X|$
+
+\textbf{补码转值：} MSB=1？ 值$-2^N$
+}}
+\end{center}
+
+\subsection{K-Map位置}
+
 \begin{center}
 \begin{tikzpicture}[scale=0.5]
 \draw (0,0) grid (4,4);
@@ -69,88 +75,74 @@ Don't Care & 可当1扩大圈 \\
 \end{tikzpicture}
 \end{center}
 
+\textbf{顺序：}00-01-11-10
+
+\textbf{圈大小：}1,2,4,8,16
+
+\textbf{四角可以圈！}
+
 \subsection{RS锁存器}
 
 \begin{center}
-\small
-\begin{tabular}{|cc|c|l|}
+\begin{tabular}{|cc|c|}
 \hline
-S & R & Q$_{next}$ & 说明 \\
+S & R & Q \\
 \hline
-0 & 0 & Q & 保持 \\
-0 & 1 & 0 & 复位 \\
-1 & 0 & 1 & 置位 \\
-1 & 1 & ? & 禁止 \\
+0 & 0 & 保持 \\
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 1 & 禁止 \\
 \hline
 \end{tabular}
 \end{center}
 
-特征方程: $Q_{next} = S + \bar{R}Q$
+\textbf{口诀：}S高Q高，R高Q低
 
 \subsection{香农展开}
 
 \begin{center}
-\fbox{$F = x \cdot F_{x=1} + \bar{x} \cdot F_{x=0}$}
+\fbox{$F = \bar{A}F_0 + AF_1$}
 \end{center}
 
-\textbf{步骤:}
-\begin{enumerate}
-\item 令$x=1$，计算$F_1$
-\item 令$x=0$，计算$F_0$
-\item 组合: $F = xF_1 + \bar{x}F_0$
-\end{enumerate}
+$F_0$：A换0，$\bar{A}$换1
 
-\subsection{流水线}
+$F_1$：A换1，$\bar{A}$换0
 
-\textbf{5级:} IF $\to$ ID $\to$ EX $\to$ MEM $\to$ WB
+\subsection{流水线连连看}
 
-\textbf{冲突类型:}
-\begin{itemize}
-\item RAW: 读后写 (最常见)
-\item Forwarding: EX/MEM$\to$EX, MEM/WB$\to$EX
-\item Load-Use: 必须Stall 1周期
-\end{itemize}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Data Hazard & Forwarding \\
+Load-Use & Stall \\
+Branch & Flush \\
+\hline
+\end{tabular}
+\end{center}
 
-\textbf{性能:}
-\[
-\text{CPI} = 1 + \text{Stall率}
-\]
-\[
-\text{Speedup} = \frac{nk}{k+n-1} \to k
-\]
+\textbf{CPI} = 1 + Stall率
+
+\textbf{5级：}IF-ID-EX-MEM-WB
 
 \subsection{布尔代数}
 
 \begin{center}
-\small
 \begin{tabular}{|l|l|}
 \hline
-德摩根 & $\overline{A+B}=\bar{A}\bar{B}$, $\overline{AB}=\bar{A}+\bar{B}$ \\
-吸收律 & $A+AB=A$, $A(A+B)=A$ \\
-异或 & $A \oplus B = A\bar{B}+\bar{A}B$ \\
-补余 & $A+\bar{A}=1$, $A\bar{A}=0$ \\
+$\overline{A+B}=\bar{A}\bar{B}$ & 德摩根 \\
+$\overline{AB}=\bar{A}+\bar{B}$ & 德摩根 \\
+$A+AB=A$ & 吸收律 \\
+$A+\bar{A}B=A+B$ & 互补 \\
+$A\oplus B=A\bar{B}+\bar{A}B$ & 异或 \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{常用数值}
-
+\vfill
 \begin{center}
-\small
-\begin{tabular}{|c|c||c|c|}
-\hline
-$2^n$ & 值 & $n$位max & 有符号 \\
-\hline
-$2^4$ & 16 & 15 & $\pm7$ \\
-$2^8$ & 256 & 255 & $\pm127$ \\
-$2^{10}$ & 1024 & 1023 & $\pm511$ \\
-$2^{16}$ & 65536 & 65535 & $\pm32767$ \\
-\hline
-\end{tabular}
-\end{center}
+\textbf{\large Good Luck!}
 
-\vspace{6pt}
-\begin{center}
-\textbf{Good Luck!}\\
 \small 2026-01-13 10:00 | KN-A-310
+
+\textit{兄弟，稳住，你能行的！}
 \end{center}

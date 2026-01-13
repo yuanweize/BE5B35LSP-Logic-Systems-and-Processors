@@ -1,157 +1,143 @@
 % ==============================================================================
-% 第一章: 数值系统 - 手把手演算
+% 第一章: 数值系统 - 计算器流，拒绝二进制！
 % ==============================================================================
-\section{数值系统实战}
+\section{数值系统 (计算器流)}
 
-\subsection{核心概念速记}
+\begin{hack}[核心思想：十进制算完再转！]
+\textbf{别傻乎乎转二进制算了！}
 
-\begin{formula}[n位数值范围]
-\begin{tabular}{ll}
-\textbf{无符号:} & $0$ 到 $2^n - 1$ \\
-\textbf{有符号(补码):} & $-2^{n-1}$ 到 $2^{n-1} - 1$
-\end{tabular}
+用十进制算，最后一步再处理溢出。
+\end{hack}
 
-\vspace{3pt}
-\textbf{常用值:}
-\begin{itemize}
-\item 8位无符号: 0 到 255
-\item 8位有符号: $-128$ 到 $+127$
-\item 16位无符号: 0 到 65535
-\item 16位有符号: $-32768$ 到 $+32767$
-\end{itemize}
-\end{formula}
-
-\subsection{补码转换 - 手把手}
-
-\begin{algorithm}[负数转补码 (Pro Way)]
-\textbf{目标:} 将 $-X$ 转为 $n$ 位补码
-
-\textbf{方法:} $-X$ 的补码 $= 2^n - X$
-
-\vspace{3pt}
-\textbf{例: 8位表示 $-5$}
-\begin{enumerate}
-\item 计算: $2^8 - 5 = 256 - 5 = 251$
-\item 转二进制: $251 = 128 + 64 + 32 + 16 + 8 + 2 + 1$
-\item 答案: \texttt{11111011}
-\end{enumerate}
-
-\vspace{3pt}
-\textbf{验证:} 用传统方法检验
-\begin{enumerate}
-\item $5$ 的二进制: \texttt{00000101}
-\item 取反: \texttt{11111010}
-\item 加1: \texttt{11111011} \checkmark
-\end{enumerate}
-\end{algorithm}
-
-\begin{algorithm}[补码转十进制]
-\textbf{给定:} $n$ 位二进制 $b_{n-1}b_{n-2}...b_1b_0$
-
-\textbf{有符号解释:}
-\[
-\text{值} = -b_{n-1} \cdot 2^{n-1} + \sum_{i=0}^{n-2} b_i \cdot 2^i
-\]
-
-\vspace{3pt}
-\textbf{例: \texttt{11110100} (8位有符号)}
-\begin{enumerate}
-\item MSB = 1，所以是负数
-\item 计算: $-1 \times 128 + 1 \times 64 + 1 \times 32 + 1 \times 16 + 0 + 1 \times 4 + 0 + 0$
-\item $= -128 + 64 + 32 + 16 + 4 = -128 + 116 = -12$
-\end{enumerate}
-\end{algorithm}
-
-\subsection{模运算 - 关键考点}
-
-\begin{formula}[模运算核心公式]
-\[
-(a + b) \mod n = ((a \mod n) + (b \mod n)) \mod n
-\]
-\[
-(a \times b) \mod n = ((a \mod n) \times (b \mod n)) \mod n
-\]
-\[
-a \mod n = a - n \times \lfloor a/n \rfloor
-\]
-
-\textbf{负数取模:} 结果与除数同号 (Python风格) 或与被除数同号 (C风格)
-\end{formula}
-
-\begin{example}[典型例题: 模运算]
-\textbf{计算:} $(-17) \mod 5$
-
-\textbf{方法1 (加法修正):}
-\begin{enumerate}
-\item $-17 \div 5 = -3.4$，取 $\lfloor -3.4 \rfloor = -4$
-\item $-17 - 5 \times (-4) = -17 + 20 = 3$
-\end{enumerate}
-
-\textbf{方法2 (直觉法):}
-\begin{enumerate}
-\item $17 \mod 5 = 2$
-\item $-17 \mod 5 = 5 - 2 = 3$ (使结果为正)
-\end{enumerate}
-
-\textbf{答案:} $(-17) \mod 5 = 3$
-\end{example}
-
-\subsection{溢出判断}
-
-\begin{pitfall}[溢出判断规则]
-\textbf{无符号溢出:} 进位/借位出最高位
-
-\textbf{有符号溢出:} 两个条件同时满足
-\begin{itemize}
-\item 两个正数相加得负数
-\item 两个负数相加得正数
-\end{itemize}
-
-\textbf{判断公式:} $V = C_{n-1} \oplus C_n$ (进位异或)
-\end{pitfall}
-
-\begin{example}[溢出判断实例]
-\textbf{计算:} 8位有符号数 $100 + 50$
-
-\begin{enumerate}
-\item $100 = $ \texttt{01100100}
-\item $50 = $ \texttt{00110010}
-\item 相加: \texttt{01100100} + \texttt{00110010} = \texttt{10010110}
-\item 结果解释: $-128 + 16 + 4 + 2 = -106$
-\item \textbf{溢出!} 两个正数相加得到负数
-\end{enumerate}
-\end{example}
-
-\subsection{符号扩展}
-
-\begin{algorithm}[符号扩展规则]
-将 $n$ 位扩展到 $m$ 位 ($m > n$):
-
-\textbf{无符号:} 高位补0
-\begin{itemize}
-\item 例: 4位 \texttt{1010} $\to$ 8位 \texttt{00001010}
-\end{itemize}
-
-\textbf{有符号:} 高位复制符号位
-\begin{itemize}
-\item 例: 4位 \texttt{1010} (=-6) $\to$ 8位 \texttt{11111010} (=-6)
-\item 例: 4位 \texttt{0110} (=+6) $\to$ 8位 \texttt{00000110} (=+6)
-\end{itemize}
-\end{algorithm}
-
-\subsection{快速转换表}
+\subsection{2的幂次表 (背下来！)}
 
 \begin{center}
-\small
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|c|c||c|c||c|c|}
 \hline
-\textbf{十进制} & \textbf{二进制(4位)} & \textbf{无符号} & \textbf{有符号} \\
+$2^4$ & 16 & $2^8$ & 256 & $2^{12}$ & 4096 \\
 \hline
-0 & 0000 & 0 & 0 \\
-1 & 0001 & 1 & +1 \\
-7 & 0111 & 7 & +7 \\
-8 & 1000 & 8 & -8 \\
-15 & 1111 & 15 & -1 \\
+$2^5$ & 32 & $2^9$ & 512 & $2^{14}$ & 16384 \\
+\hline
+$2^6$ & 64 & $2^{10}$ & 1024 & $2^{16}$ & 65536 \\
+\hline
+$2^7$ & 128 & $2^{11}$ & 2048 & $2^{20}$ & 1M \\
 \hline
 \end{tabular}
 \end{center}
+
+\subsection{N位数范围 (必背)}
+
+\begin{formula}[范围速记]
+\begin{itemize}
+\item \textbf{Unsigned:} $[0, 2^N-1]$
+\item \textbf{Signed:} $[-2^{N-1}, 2^{N-1}-1]$
+\end{itemize}
+
+\textbf{常用：}
+\begin{itemize}
+\item 8位Signed: $[-128, +127]$
+\item 10位Signed: $[-512, +511]$
+\item 16位Signed: $[-32768, +32767]$
+\end{itemize}
+\end{formula}
+
+\subsection{无符号溢出}
+
+\begin{hack}[Unsigned溢出 - 直接取模！]
+\textbf{无脑公式：} 结果 = (十进制结果) \% $2^N$
+
+\vspace{3pt}
+\textbf{例：} 8位Unsigned，计算 $200 + 100$
+\begin{enumerate}
+\item 十进制：$200 + 100 = 300$
+\item 取模：$300 \mod 256 = 300 - 256 = 44$
+\item \textbf{答案：44}
+\end{enumerate}
+
+就这么简单，不用转二进制！
+\end{hack}
+
+\subsection{有符号溢出}
+
+\begin{hack}[Signed溢出 - 超了就减！]
+\textbf{无脑三步：}
+\begin{enumerate}
+\item 先用十进制算出结果 $R$
+\item 判断：$R > 2^{N-1}-1$ (最大正数)？
+\item 如果超了：$R - 2^N$ = 最终答案
+\end{enumerate}
+
+\vspace{3pt}
+\textbf{例：} 10位Signed，计算 $511 + 511$
+\begin{enumerate}
+\item 十进制：$511 + 511 = 1022$
+\item 判断：$1022 > 511$？是的！溢出了！
+\item 操作：$1022 - 1024 = -2$
+\item \textbf{答案：$-2$}
+\end{enumerate}
+
+\textbf{反向也一样：}如果 $R < -2^{N-1}$，就加 $2^N$
+\end{hack}
+
+\subsection{负数转补码}
+
+\begin{hack}[负数补码 - 不用取反加1！]
+\textbf{Pro Way公式：} $-X$ 的补码 = $2^N - X$
+
+\vspace{3pt}
+\textbf{例：} 8位表示 $-5$
+\begin{enumerate}
+\item 计算：$256 - 5 = 251$
+\item 转二进制：$251 = 128+64+32+16+8+2+1$
+\item \textbf{答案：\texttt{11111011}}
+\end{enumerate}
+
+比``取反加1''快多了！
+\end{hack}
+
+\subsection{补码转十进制}
+
+\begin{hack}[看MSB定正负！]
+\textbf{看最高位：}
+\begin{itemize}
+\item MSB=0？正数，直接转
+\item MSB=1？负数，用公式
+\end{itemize}
+
+\textbf{负数公式：} 值 = 二进制值 $- 2^N$
+
+\vspace{3pt}
+\textbf{例：} 8位 \texttt{11110100}
+\begin{enumerate}
+\item MSB=1，是负数
+\item 先当正数算：$128+64+32+16+4 = 244$
+\item 减去$2^8$：$244 - 256 = -12$
+\item \textbf{答案：$-12$}
+\end{enumerate}
+\end{hack}
+
+\subsection{符号扩展}
+
+\begin{hack}[扩展位数 - 抄符号位！]
+\textbf{Unsigned：} 高位全补0
+
+\textbf{Signed：} 高位抄MSB
+\begin{itemize}
+\item 正数(MSB=0)：补0
+\item 负数(MSB=1)：补1
+\end{itemize}
+
+\textbf{例：} 4位$\to$8位
+\begin{itemize}
+\item \texttt{0110}(+6) $\to$ \texttt{0000 0110}
+\item \texttt{1010}(-6) $\to$ \texttt{1111 1010}
+\end{itemize}
+\end{hack}
+
+\begin{pitfall}[送分题别丢分]
+\begin{itemize}
+\item 看清题目问的是Signed还是Unsigned
+\item 看清位数！8位和10位范围不一样
+\item 计算器按对！$2^{10}=1024$不是1000
+\end{itemize}
+\end{pitfall}
