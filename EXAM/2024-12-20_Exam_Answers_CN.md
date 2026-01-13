@@ -1,3 +1,13 @@
+# 2024-12-20 LSP Exam Solution / Řešení zkoušky / 考试解析
+
+> **Course**: B0B35LSP - Logické systémy a procesory | BE5B35LSP - Logic Systems and Processors
+> **University**: CVUT FEL (CTU) - Czech Technical University in Prague
+> **Keywords**: Zkouška, Exam, Test, Solutions, Vysledky, Answers, K-Map, RS Latch, Pipeline
+>
+> [🇨🇳 CN Version](./2024-12-20_Exam_Answers_CN.md) | [🇬🇧 EN Version](./2024-12-20_Exam_Answers_EN.md) | [🇨🇿 CZ Version](./2024-12-20_Exam_Answers_CZ.md)
+
+---
+
 # LSP考试 2024年12月20日（英文版，含答案）
 > ✅ **本文件已核对PDF官方答案 (Official Answers Verified from PDF)**
 

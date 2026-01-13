@@ -1,3 +1,13 @@
+# LSP Ultimate Review Guide / Ultimátní průvodce opakováním / 终极复习指南
+
+> **Course**: B0B35LSP - Logické systémy a procesory | BE5B35LSP - Logic Systems and Processors
+> **University**: CVUT FEL (ČVUT) - České vysoké učení technické v Praze | Czech Technical University in Prague
+> **Keywords**: Zkouška, Exam, Test, Solutions, Vysledky, Answers, K-Map, RS Latch, Pipeline
+>
+> [🇨🇳 CN Version](./LSP_Ultimate_Review_Guide_CN.md) | [🇬🇧 EN Version](./LSP_Ultimate_Review_Guide_EN.md) | [🇨🇿 CZ Version](./LSP_Ultimate_Review_Guide_CZ.md)
+
+---
+
 # 🎯 LSP 考试终极复习指南 - 10小时冲刺版
 
 > **考试时间**: 2026年1月13日 10:00-11:30  

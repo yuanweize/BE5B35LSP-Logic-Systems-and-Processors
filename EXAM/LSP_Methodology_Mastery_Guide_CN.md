@@ -1,3 +1,13 @@
+# LSP Methodology Mastery Guide / Metodika zkoušky (průvodce) / 考试方法论突击指南
+
+> **Course**: B0B35LSP - Logické systémy a procesory | BE5B35LSP - Logic Systems and Processors
+> **University**: CVUT FEL (ČVUT) - České vysoké učení technické v Praze | Czech Technical University in Prague
+> **Keywords**: Zkouška, Exam, Test, Solutions, Vysledky, Answers, K-Map, RS Latch, Pipeline
+>
+> [🇨🇳 CN Version](./LSP_Methodology_Mastery_Guide_CN.md) | [🇬🇧 EN Version](./LSP_Methodology_Mastery_Guide_EN.md) | [🇨🇿 CZ Version](./LSP_Methodology_Mastery_Guide_CZ.md)
+
+---
+
 # 🎯 LSP 考试终极突击教材 (Exam Methodology Mastery)
 
 > **⚡ 2026年1月13日考试专用版**  
