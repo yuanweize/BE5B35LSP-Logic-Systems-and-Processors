@@ -2,7 +2,6 @@
 
 > **课程**: LSP (Logické systémy a procesory) - Logic Systems and Processors  
 > **学校**: CTU FEL Prague (捷克理工大学电气工程学院)  
-> **学期**: 本科课程  
 > **更新**: 2026年1月
 
 ---
