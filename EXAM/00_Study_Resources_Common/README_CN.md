@@ -1,18 +1,18 @@
 > 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
 
-# LSP Common Study Resources
+# LSP 通用复习资料
 
-This folder contains shared study resources that are not tied to a specific exam date.
+本目录包含不绑定具体考试日期的通用学习资源。
 
-## Guides (English)
+## 复习指南（中文）
 
-- [LSP_Methodology_Mastery_Guide_EN.md](LSP_Methodology_Mastery_Guide_EN.md)  \
-  - PDF: [LSP_Methodology_Mastery_Guide_EN_Printable.pdf](LSP_Methodology_Mastery_Guide_EN_Printable.pdf)
+- [LSP_Methodology_Mastery_Guide_CN.md](LSP_Methodology_Mastery_Guide_CN.md)  \
+  - PDF: [LSP_Methodology_Mastery_Guide_CN_Printable.pdf](LSP_Methodology_Mastery_Guide_CN_Printable.pdf)
 
-- [LSP_Ultimate_Review_Guide_EN.md](LSP_Ultimate_Review_Guide_EN.md)  \
-  - PDF: [LSP_Ultimate_Review_Guide_EN_Printable.pdf](LSP_Ultimate_Review_Guide_EN_Printable.pdf)
+- [LSP_Ultimate_Review_Guide_CN.md](LSP_Ultimate_Review_Guide_CN.md)  \
+  - PDF: [LSP_Ultimate_Review_Guide_CN_Printable.pdf](LSP_Ultimate_Review_Guide_CN_Printable.pdf)
 
-## Examples
+## 例题与样题
 
 - [Legacy_Selected_Examples_2015.md](Legacy_Selected_Examples_2015.md)
   - PDF: [Legacy_Selected_Examples_2015.pdf](Legacy_Selected_Examples_2015.pdf)
@@ -26,13 +26,13 @@ This folder contains shared study resources that are not tied to a specific exam
   - PDF: [Legacy_English_Sample_Exam.pdf](Legacy_English_Sample_Exam.pdf)
   - Markdown PDF: [Legacy_English_Sample_Exam_md.pdf](Legacy_English_Sample_Exam_md.pdf)
 
-## Instructions
+## 考试说明
 
 - [LSP_Exam_Instructions_2026.md](LSP_Exam_Instructions_2026.md)
   - Markdown PDF: [LSP_Exam_Instructions_2026_md.pdf](LSP_Exam_Instructions_2026_md.pdf)
-  - Email source: [LSP_Exam_Instructions_2026.eml](LSP_Exam_Instructions_2026.eml)
+  - 邮件源文件: [LSP_Exam_Instructions_2026.eml](LSP_Exam_Instructions_2026.eml)
 
-## Other
+## 其他
 
 - [README_md.pdf](README_md.pdf)
 - [LSP_Exam_Methodology_Mastery_md.pdf](LSP_Exam_Methodology_Mastery_md.pdf)

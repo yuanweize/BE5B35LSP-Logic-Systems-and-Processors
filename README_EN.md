@@ -57,7 +57,7 @@ LSP/
 │
 ├── tools/                          # 🛠️ Tools
 │   ├── md2pdf.py                   # Markdown → PDF
-│   └── batch_convert.py            # Batch conversion
+│   └── batch_convert.py            # 批量转换
 │
 ├── BinaryPrerequisite_V20.pdf      # Binary prerequisites
 ├── LogicCircuitsOnFPGAs.pdf        # Logic circuits on FPGAs
