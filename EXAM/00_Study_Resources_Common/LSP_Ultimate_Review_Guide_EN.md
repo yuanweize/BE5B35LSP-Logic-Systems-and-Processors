@@ -8,7 +8,9 @@
 
 ---
 
-# 🎯 LSP 考试终极复习指南 - 10小时冲刺版
+# 🎯 LSP Ultimate Review Guide — 10-hour sprint edition
+
+> Note: This EN variant follows the CN master closely; some section titles and examples remain in Chinese for now.
 
 > **考试时间**: 2026年1月13日 10:00-11:30  
 > **考试地点**: Karlovo náměstí A楼 KN-A-310  
