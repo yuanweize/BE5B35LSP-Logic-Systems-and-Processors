@@ -1,0 +1,161 @@
+% ==============================================================================
+% Chapter 4: Pipeline - matching game
+% ==============================================================================
+\section{Pipeline (Matching Game)}
+
+\begin{hack}[Match keywords to answers]
+\textbf{When you see these keywords, write the corresponding answer immediately:}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Problem says} & \textbf{Write} \\
+\hline
+Data Hazard & Forwarding \\
+\hline
+Load-Use & Stall (bubble) \\
+\hline
+Branch/Jump & Flush \\
+\hline
+Structural & Add hardware \\
+\hline
+\end{tabular}
+\end{center}
+\end{hack}
+
+\subsection{5-stage pipeline (memorize)}
+
+\begin{formula}[Five stages]
+\begin{center}
+\texttt{IF $\to$ ID $\to$ EX $\to$ MEM $\to$ WB}
+\end{center}
+
+\begin{tabular}{|c|l|l|}
+\hline
+IF & Instruction Fetch & fetch instruction \\
+ID & Instruction Decode & decode / read registers \\
+EX & Execute & ALU operation \\
+MEM & Memory & memory access \\
+WB & Write Back & write back \\
+\hline
+\end{tabular}
+\end{formula}
+
+\subsection{Pipeline timing diagram template}
+
+\begin{hack}[Copy this template]
+\begin{verbatim}
+	C1  C2  C3  C4  C5  C6  C7
+I1   IF  ID  EX  MEM WB
+I2       IF  ID  EX  MEM WB
+I3           IF  ID  EX  MEM WB
+I4               IF  ID  EX  MEM WB
+\end{verbatim}
+
+\textbf{Pattern:} each instruction shifts one column to the right
+\end{hack}
+
+\subsection{Three hazard types}
+
+\begin{keybox}[Hazard categories]
+\textbf{1. Structural hazard:}
+\begin{itemize}
+\item hardware resource conflict (e.g., single memory port)
+\item fix: add hardware
+\end{itemize}
+
+\textbf{2. Data hazard:}
+\begin{itemize}
+\item later instruction needs a value not produced yet
+\item fix: forwarding or stall
+\end{itemize}
+
+\textbf{3. Control hazard:}
+\begin{itemize}
+\item branch/jump fetches the wrong instruction
+\item fix: flush / prediction
+\end{itemize}
+\end{keybox}
+
+\subsection{RAW hazard}
+
+\begin{hack}[RAW detection]
+\textbf{Look at registers:}
+\begin{verbatim}
+I1: ADD R1, R2, R3   ; writes R1
+I2: SUB R4, R1, R5   ; reads R1 <- RAW!
+\end{verbatim}
+
+\textbf{Test:} does a later instruction read a register that an earlier instruction writes?
+
+If yes $\to$ RAW hazard.
+\end{hack}
+
+\subsection{Forwarding paths}
+
+\begin{hack}[Two forwarding routes]
+\textbf{1. EX/MEM $\to$ EX:}
+\begin{itemize}
+\item forward ALU result from the previous instruction
+\item fixes 1-cycle RAW
+\end{itemize}
+
+\textbf{2. MEM/WB $\to$ EX:}
+\begin{itemize}
+\item forward result from two instructions back
+\item fixes 2-cycle RAW
+\end{itemize}
+\end{hack}
+
+\subsection{Load-use must stall}
+
+\begin{pitfall}[Forwarding cannot fix load-use]
+\begin{verbatim}
+LW  R1, 0(R2)   ; data available only after MEM
+ADD R3, R1, R4  ; needs data in EX
+\end{verbatim}
+
+\textbf{You must insert 1 stall (bubble):}
+\begin{verbatim}
+	C1  C2  C3  C4  C5  C6
+LW   IF  ID  EX  MEM WB
+ADD      IF  ID  --  EX  MEM
+\end{verbatim}
+
+``--'' is the bubble/stall.
+\end{pitfall}
+
+\subsection{CPI calculation}
+
+\begin{hack}[CPI formula]
+\[
+\text{CPI} = 1 + \text{stall rate}
+\]
+
+\textbf{Example:} 30\% of instructions are loads, and 50\% of those cause a stall
+\begin{align*}
+\text{stall rate} &= 0.3 \times 0.5 = 0.15 \\
+\text{CPI} &= 1 + 0.15 = 1.15
+\end{align*}
+\end{hack}
+
+\subsection{Speedup}
+
+\begin{formula}[Speedup formula]
+\[
+\text{Speedup} = \frac{nk}{k + n - 1} \to k
+\]
+
+$k$ = number of stages, $n$ = number of instructions
+
+For large $n$, speedup approaches $k$.
+\end{formula}
+
+\begin{hack}[Pipeline problem recipe]
+\begin{enumerate}
+\item Draw the timing diagram
+\item Find hazards (check registers)
+\item Mark forwarding arrows or stalls
+\item Compute CPI
+\end{enumerate}
+\end{hack}

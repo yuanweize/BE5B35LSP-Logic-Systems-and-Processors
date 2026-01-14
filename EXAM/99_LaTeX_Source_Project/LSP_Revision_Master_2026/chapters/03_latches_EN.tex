@@ -1,0 +1,133 @@
+% ==============================================================================
+% Chapter 3: RS latch + Shannon expansion - "traffic light" rule
+% ==============================================================================
+\section{RS Latch (Traffic-Light Rule)}
+
+\begin{hack}[NOR-gate RS - active-high]
+\textbf{Traffic-light memory trick:}
+\begin{itemize}
+\item $S=1$ $\to$ $Q$ becomes 1 (Set)
+\item $R=1$ $\to$ $Q$ becomes 0 (Reset)
+\item Both 0 $\to$ \textbf{copy the previous state}
+\item Both 1 $\to$ write ``forbidden'' / ``unstable''
+\end{itemize}
+\end{hack}
+
+\begin{hack}[NAND-gate RS - active-low]
+\textbf{It is the opposite!}
+\begin{itemize}
+\item $\bar{S}=0$ $\to$ $Q$ becomes 1
+\item $\bar{R}=0$ $\to$ $Q$ becomes 0
+\item Both 1 $\to$ \textbf{copy the previous state}
+\item Both 0 $\to$ forbidden
+\end{itemize}
+\end{hack}
+
+\subsection{RS truth table (must memorize)}
+
+\begin{center}
+\begin{tabular}{|cc|c|l|}
+\hline
+\textbf{S} & \textbf{R} & \textbf{Q} & \textbf{What to write} \\
+\hline
+0 & 0 & Q & copy previous \\
+0 & 1 & 0 & write 0 \\
+1 & 0 & 1 & write 1 \\
+1 & 1 & ? & write ``forbidden'' \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{How to solve waveform problems}
+
+\begin{hack}[Three steps for timing diagrams]
+\begin{enumerate}
+\item Draw vertical lines at every change point on S and R
+\item For each time segment, read the values of S and R
+\item Fill in Q using the truth table
+\end{enumerate}
+
+\textbf{Mnemonic:} S high $\Rightarrow$ Q high, R high $\Rightarrow$ Q low, both low $\Rightarrow$ copy!
+\end{hack}
+
+% ==============================================================================
+\section{Shannon Expansion (Copy-and-Paste Method)}
+% ==============================================================================
+
+\begin{hack}[Shannon expansion - just apply the formula]
+\textbf{Do not derive it. Use the template:}
+\[
+F = \bar{A} \cdot F_0 + A \cdot F_1
+\]
+
+\textbf{Three steps:}
+\begin{enumerate}
+\item $F_0$: replace every $A$ with 0
+\item $F_1$: replace every $A$ with 1
+\item Plug into the formula
+\end{enumerate}
+\end{hack}
+
+\subsection{Shannon expansion example}
+
+\begin{example}[Example: $F = AB + \bar{A}C + BC$, expand w.r.t. A]
+\textbf{Step 1: compute $F_0$ (A=0)}
+
+Replace $A \to 0$ and $\bar{A} \to 1$:
+\begin{align*}
+F_0 &= (0)B + (1)C + BC \\
+	&= 0 + C + BC \\
+	&= C \quad \text{(absorption law)}
+\end{align*}
+
+\textbf{Step 2: compute $F_1$ (A=1)}
+
+Replace $A \to 1$ and $\bar{A} \to 0$:
+\begin{align*}
+F_1 &= (1)B + (0)C + BC \\
+	&= B + 0 + BC \\
+	&= B \quad \text{(absorption law)}
+\end{align*}
+
+\textbf{Step 3: plug into the formula}
+\[
+\boxed{F = \bar{A} \cdot C + A \cdot B}
+\]
+\end{example}
+
+\begin{hack}[Absorption law quick notes]
+\begin{itemize}
+\item $X + XY = X$ (keep the bigger term)
+\item $X + \bar{X}Y = X + Y$ (complement trick)
+\end{itemize}
+\end{hack}
+
+\subsection{Two-variable Shannon expansion}
+
+\begin{hack}[Expand w.r.t. AB together]
+\textbf{Formula:}
+\[
+F = \bar{A}\bar{B}F_{00} + \bar{A}BF_{01} + A\bar{B}F_{10} + ABF_{11}
+\]
+
+\textbf{Procedure:} substitute (A,B)=(0,0), (0,1), (1,0), (1,1).
+\end{hack}
+
+\subsection{Shannon expansion as a MUX}
+
+\begin{keybox}[Shannon = 2:1 MUX]
+$F = \bar{A} \cdot F_0 + A \cdot F_1$ corresponds to:
+\begin{itemize}
+\item select = $A$
+\item input 0 = $F_0$
+\item input 1 = $F_1$
+\end{itemize}
+\end{keybox}
+
+\begin{pitfall}[Common Shannon mistakes]
+\begin{itemize}
+\item When substituting $A=0$, remember $\bar{A}=1$ (don't swap them)
+\item Don't forget absorption when simplifying
+\item In a MUX, connect $I_0$ to $F_0$ and $I_1$ to $F_1$ (order matters)
+\end{itemize}
+\end{pitfall}

@@ -31,11 +31,11 @@ cz: main_CZ.tex $(TEX_DEPS)
 
 clean:
 	@if [ -n "$(LATEXMK)" ]; then \
-		latexmk -C main_CN.tex || true; \
-		latexmk -C main_EN.tex || true; \
-		latexmk -C main_CZ.tex || true; \
+		latexmk -c -jobname=LSP_Revision_Master_2026_CN main_CN.tex || true; \
+		latexmk -c -jobname=LSP_Revision_Master_2026_EN main_EN.tex || true; \
+		latexmk -c -jobname=LSP_Revision_Master_2026_CZ main_CZ.tex || true; \
 	else \
-		rm -f *.aux *.log *.out *.toc *.lof *.lot *.bbl *.blg *.fls *.fdb_latexmk; \
+		rm -f *.aux *.log *.out *.toc *.lof *.lot *.bbl *.blg *.fls *.fdb_latexmk *.xdv *.synctex.gz; \
 		rm -f chapters/*.aux; \
 	fi
 	rm -f *.run.xml *.bbl

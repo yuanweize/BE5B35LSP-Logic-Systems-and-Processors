@@ -1,0 +1,148 @@
+% ==============================================================================
+% Kapitola 5: Tahák - souhrn bezmyšlenkových vzorců
+% ==============================================================================
+\section{Tahák (před zkouškou si přečti tuhle stránku)}
+
+\subsection{Mocniny dvou}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$2^4$ & $2^5$ & $2^6$ & $2^7$ & $2^8$ & $2^9$ & $2^{10}$ & $2^{16}$ \\
+\hline
+16 & 32 & 64 & 128 & 256 & 512 & 1024 & 65536 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Rozsahy hodnot}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Počet bitů & Unsigned & Signed \\
+\hline
+8 & 0$\sim$255 & $-128\sim+127$ \\
+10 & 0$\sim$1023 & $-512\sim+511$ \\
+16 & 0$\sim$65535 & $-32768\sim+32767$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Rychlá kontrola výpočtů}
+
+\begin{center}
+\fbox{\parbox{0.9\linewidth}{
+\textbf{Unsigned přetečení:} výsledek \% $2^N$
+
+\textbf{Signed přetečení:} pokud výsledek $> 2^{N-1}-1$, odečti $2^N$
+
+\textbf{Dvojkový doplněk záporného:} $2^N - |X|$
+
+\textbf{Dvojkový doplněk na hodnotu:} MSB=1? hodnota $-2^N$
+}}
+\end{center}
+
+\subsection{Pozice v K-map}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) grid (4,4);
+\node at (0.5, 4.3) {\tiny 00};
+\node at (1.5, 4.3) {\tiny 01};
+\node at (2.5, 4.3) {\tiny 11};
+\node at (3.5, 4.3) {\tiny 10};
+\node at (-0.3, 3.5) {\tiny 00};
+\node at (-0.3, 2.5) {\tiny 01};
+\node at (-0.3, 1.5) {\tiny 11};
+\node at (-0.3, 0.5) {\tiny 10};
+\node at (0.5,3.5) {\tiny 0};
+\node at (1.5,3.5) {\tiny 1};
+\node at (2.5,3.5) {\tiny 3};
+\node at (3.5,3.5) {\tiny 2};
+\node at (0.5,2.5) {\tiny 4};
+\node at (1.5,2.5) {\tiny 5};
+\node at (2.5,2.5) {\tiny 7};
+\node at (3.5,2.5) {\tiny 6};
+\node at (0.5,1.5) {\tiny 12};
+\node at (1.5,1.5) {\tiny 13};
+\node at (2.5,1.5) {\tiny 15};
+\node at (3.5,1.5) {\tiny 14};
+\node at (0.5,0.5) {\tiny 8};
+\node at (1.5,0.5) {\tiny 9};
+\node at (2.5,0.5) {\tiny 11};
+\node at (3.5,0.5) {\tiny 10};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Pořadí:} 00-01-11-10
+
+\textbf{Velikosti skupin:} 1,2,4,8,16
+
+\textbf{Rohy se mohou seskupovat!}
+
+\subsection{RS záchyt}
+
+\begin{center}
+\begin{tabular}{|cc|c|}
+\hline
+S & R & Q \\
+\hline
+0 & 0 & Drž \\
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 1 & Zakázáno \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Pomůcka:} S vysoko $\Rightarrow$ Q vysoko, R vysoko $\Rightarrow$ Q nízko
+
+\subsection{Shannonův rozklad}
+
+\begin{center}
+\fbox{$F = \bar{A}F_0 + AF_1$}
+\end{center}
+
+$F_0$: dosaď $A=0$, $\bar{A}=1$
+
+$F_1$: dosaď $A=1$, $\bar{A}=0$
+
+\subsection{Pipeline přiřazovačka}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Data Hazard & Forwarding \\
+Load-Use & Stall \\
+Branch & Flush \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{CPI} = 1 + míra stallů
+
+\textbf{5 stupňů:} IF-ID-EX-MEM-WB
+
+\subsection{Booleovská algebra}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+$\overline{A+B}=\bar{A}\bar{B}$ & De Morgan \\
+$\overline{AB}=\bar{A}+\bar{B}$ & De Morgan \\
+$A+AB=A$ & Absorpce \\
+$A+\bar{A}B=A+B$ & Doplňkové pravidlo \\
+$A\oplus B=A\bar{B}+\bar{A}B$ & XOR \\
+\hline
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{center}
+\textbf{\large Hodně štěstí!}
+
+\small 2026-01-13 10:00 | KN-A-310
+
+\textit{V klidu. Zvládneš to.}
+\end{center}

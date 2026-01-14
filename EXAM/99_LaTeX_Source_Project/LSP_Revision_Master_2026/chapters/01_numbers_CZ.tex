@@ -1,0 +1,143 @@
+% ==============================================================================
+% Kapitola 1: Číselné soustavy - počítej v desítkové
+% ==============================================================================
+\section{Číselné soustavy (počítej v desítkové)}
+
+\begin{hack}[Hlavní myšlenka: spočítej v desítkové, na konci převeď]
+\textbf{Nedělej celé výpočty v binární soustavě.}
+
+Počítej v desítkové a přetečení řeš až v posledním kroku.
+\end{hack}
+
+\subsection{Mocniny dvou (nauč se)}
+
+\begin{center}
+\begin{tabular}{|c|c||c|c||c|c|}
+\hline
+$2^4$ & 16 & $2^8$ & 256 & $2^{12}$ & 4096 \\
+\hline
+$2^5$ & 32 & $2^9$ & 512 & $2^{14}$ & 16384 \\
+\hline
+$2^6$ & 64 & $2^{10}$ & 1024 & $2^{16}$ & 65536 \\
+\hline
+$2^7$ & 128 & $2^{11}$ & 2048 & $2^{20}$ & 1M \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Rozsahy pro N bitů (povinně)}
+
+\begin{formula}[Rychlé poznámky k rozsahu]
+\begin{itemize}
+\item \textbf{Unsigned:} $[0, 2^N-1]$
+\item \textbf{Signed:} $[-2^{N-1}, 2^{N-1}-1]$
+\end{itemize}
+
+\textbf{Často používané:}
+\begin{itemize}
+\item 8-bit signed: $[-128, +127]$
+\item 10-bit signed: $[-512, +511]$
+\item 16-bit signed: $[-32768, +32767]$
+\end{itemize}
+\end{formula}
+
+\subsection{Přetečení bez znaménka (unsigned)}
+
+\begin{hack}[Unsigned přetečení - vezmi modulo]
+\textbf{Pravidlo:} výsledek = (desítkový výsledek) \% $2^N$
+
+\vspace{3pt}
+\textbf{Příklad:} 8-bit unsigned, spočti $200 + 100$
+\begin{enumerate}
+\item Desítkově: $200 + 100 = 300$
+\item Modulo: $300 \mod 256 = 300 - 256 = 44$
+\item \textbf{Výsledek: 44}
+\end{enumerate}
+
+Hotovo. Není potřeba převádět do binární.
+\end{hack}
+
+\subsection{Přetečení se znaménkem (signed)}
+
+\begin{hack}[Signed přetečení - když je to nad maximum, odečti $2^N$]
+\textbf{Postup ve třech krocích:}
+\begin{enumerate}
+\item Spočítej desítkový výsledek $R$
+\item Ověř: $R > 2^{N-1}-1$ (max kladné číslo)?
+\item Pokud ano: $R - 2^N$ je finální výsledek
+\end{enumerate}
+
+\vspace{3pt}
+\textbf{Příklad:} 10-bit signed, spočti $511 + 511$
+\begin{enumerate}
+\item Desítkově: $511 + 511 = 1022$
+\item Kontrola: $1022 > 511$? Ano, přetečení.
+\item Oprava: $1022 - 1024 = -2$
+\item \textbf{Výsledek: $-2$}
+\end{enumerate}
+
+\textbf{Opačný směr:} pokud $R < -2^{N-1}$, přičti $2^N$.
+\end{hack}
+
+\subsection{Záporné číslo do dvojkového doplňku}
+
+\begin{hack}[Dvojkový doplněk pro záporná čísla - bez invertování + 1]
+\textbf{Vzorec:} dvojkový doplněk čísla $-X$ je $2^N - X$
+
+\vspace{3pt}
+\textbf{Příklad:} 8-bit reprezentace $-5$
+\begin{enumerate}
+\item Spočti: $256 - 5 = 251$
+\item Převod do binární: $251 = 128+64+32+16+8+2+1$
+\item \textbf{Výsledek: \texttt{11111011}}
+\end{enumerate}
+
+Je to rychlejší než ``invertuj bity + 1''.
+\end{hack}
+
+\subsection{Dvojkový doplněk na desítkovou hodnotu}
+
+\begin{hack}[Znaménko urči podle MSB]
+\textbf{Podívej se na nejvyšší bit:}
+\begin{itemize}
+\item MSB=0: kladné, převod normálně
+\item MSB=1: záporné, použij vzorec
+\end{itemize}
+
+\textbf{Vzorec pro záporné:} hodnota = (binární hodnota jako unsigned) $- 2^N$
+
+\vspace{3pt}
+\textbf{Příklad:} 8-bit \texttt{11110100}
+\begin{enumerate}
+\item MSB=1, tedy záporné
+\item Jako unsigned: $128+64+32+16+4 = 244$
+\item Odečti $2^8$: $244 - 256 = -12$
+\item \textbf{Výsledek: $-12$}
+\end{enumerate}
+\end{hack}
+
+\subsection{Znaménkové rozšíření}
+
+\begin{hack}[Rozšíření šířky - zkopíruj znaménkový bit]
+\textbf{Unsigned:} doplň 0
+
+\textbf{Signed:} zopakuj MSB
+\begin{itemize}
+\item Kladné (MSB=0): doplň 0
+\item Záporné (MSB=1): doplň 1
+\end{itemize}
+
+\textbf{Příklad:} 4-bit $\to$ 8-bit
+\begin{itemize}
+\item \texttt{0110} (+6) $\to$ \texttt{0000 0110}
+\item \texttt{1010} (-6) $\to$ \texttt{1111 1010}
+\end{itemize}
+\end{hack}
+
+\begin{pitfall}[Neztrať snadné body]
+\begin{itemize}
+\item Pozor, zda je zadání signed nebo unsigned
+\item Pozor na počet bitů (8-bit a 10-bit mají jiné rozsahy)
+\item Správné mocniny: $2^{10}=1024$, ne 1000
+\end{itemize}
+\end{pitfall}
