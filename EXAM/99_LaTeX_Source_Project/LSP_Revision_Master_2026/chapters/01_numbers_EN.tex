@@ -1,0 +1,143 @@
+% ==============================================================================
+% Chapter 1: Number Systems - Calculator-first, avoid binary
+% ==============================================================================
+\section{Number Systems (Calculator-first)}
+
+\begin{hack}[Core idea: compute in decimal, convert at the end]
+\textbf{Don't waste time doing the whole thing in binary.}
+
+Compute in decimal first, and handle overflow only at the last step.
+\end{hack}
+
+\subsection{Powers of Two (memorize)}
+
+\begin{center}
+\begin{tabular}{|c|c||c|c||c|c|}
+\hline
+$2^4$ & 16 & $2^8$ & 256 & $2^{12}$ & 4096 \\
+\hline
+$2^5$ & 32 & $2^9$ & 512 & $2^{14}$ & 16384 \\
+\hline
+$2^6$ & 64 & $2^{10}$ & 1024 & $2^{16}$ & 65536 \\
+\hline
+$2^7$ & 128 & $2^{11}$ & 2048 & $2^{20}$ & 1M \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{N-bit ranges (must know)}
+
+\begin{formula}[Range quick notes]
+\begin{itemize}
+\item \textbf{Unsigned:} $[0, 2^N-1]$
+\item \textbf{Signed:} $[-2^{N-1}, 2^{N-1}-1]$
+\end{itemize}
+
+\textbf{Common:}
+\begin{itemize}
+\item 8-bit signed: $[-128, +127]$
+\item 10-bit signed: $[-512, +511]$
+\item 16-bit signed: $[-32768, +32767]$
+\end{itemize}
+\end{formula}
+
+\subsection{Unsigned overflow}
+
+\begin{hack}[Unsigned overflow - take modulo]
+\textbf{Rule:} result = (decimal result) \% $2^N$
+
+\vspace{3pt}
+\textbf{Example:} 8-bit unsigned, compute $200 + 100$
+\begin{enumerate}
+\item Decimal: $200 + 100 = 300$
+\item Modulo: $300 \mod 256 = 300 - 256 = 44$
+\item \textbf{Answer: 44}
+\end{enumerate}
+
+That's it. No need to convert to binary.
+\end{hack}
+
+\subsection{Signed overflow}
+
+\begin{hack}[Signed overflow - subtract $2^N$ if above max]
+\textbf{Three-step recipe:}
+\begin{enumerate}
+\item Compute the decimal result $R$
+\item Check: $R > 2^{N-1}-1$ (max positive)?
+\item If yes: $R - 2^N$ is the final answer
+\end{enumerate}
+
+\vspace{3pt}
+\textbf{Example:} 10-bit signed, compute $511 + 511$
+\begin{enumerate}
+\item Decimal: $511 + 511 = 1022$
+\item Check: $1022 > 511$? Yes, overflow.
+\item Fix: $1022 - 1024 = -2$
+\item \textbf{Answer: $-2$}
+\end{enumerate}
+
+\textbf{Symmetric case:} if $R < -2^{N-1}$, then add $2^N$.
+\end{hack}
+
+\subsection{Negative numbers to two's complement}
+
+\begin{hack}[Two's complement for negatives - no bit-flip + 1 needed]
+\textbf{Pro formula:} two's complement of $-X$ is $2^N - X$
+
+\vspace{3pt}
+\textbf{Example:} 8-bit representation of $-5$
+\begin{enumerate}
+\item Compute: $256 - 5 = 251$
+\item Convert to binary: $251 = 128+64+32+16+8+2+1$
+\item \textbf{Answer: \texttt{11111011}}
+\end{enumerate}
+
+Much faster than ``invert bits + 1''.
+\end{hack}
+
+\subsection{Two's complement to decimal}
+
+\begin{hack}[Use MSB to determine sign]
+\textbf{Check the most significant bit:}
+\begin{itemize}
+\item MSB=0: positive, convert normally
+\item MSB=1: negative, use the formula
+\end{itemize}
+
+\textbf{Negative formula:} value = (unsigned binary value) $- 2^N$
+
+\vspace{3pt}
+\textbf{Example:} 8-bit \texttt{11110100}
+\begin{enumerate}
+\item MSB=1, so it's negative
+\item Treat as unsigned: $128+64+32+16+4 = 244$
+\item Subtract $2^8$: $244 - 256 = -12$
+\item \textbf{Answer: $-12$}
+\end{enumerate}
+\end{hack}
+
+\subsection{Sign extension}
+
+\begin{hack}[Extending bit-width - copy the sign bit]
+\textbf{Unsigned:} pad with 0s
+
+\textbf{Signed:} replicate MSB
+\begin{itemize}
+\item Positive (MSB=0): pad with 0s
+\item Negative (MSB=1): pad with 1s
+\end{itemize}
+
+\textbf{Example:} 4-bit $\to$ 8-bit
+\begin{itemize}
+\item \texttt{0110} (+6) $\to$ \texttt{0000 0110}
+\item \texttt{1010} (-6) $\to$ \texttt{1111 1010}
+\end{itemize}
+\end{hack}
+
+\begin{pitfall}[Don't lose free points]
+\begin{itemize}
+\item Read carefully: signed vs unsigned
+\item Watch the bit-width (8-bit vs 10-bit ranges differ)
+\item Use the right powers of two: $2^{10}=1024$, not 1000
+\end{itemize}
+\end{pitfall}

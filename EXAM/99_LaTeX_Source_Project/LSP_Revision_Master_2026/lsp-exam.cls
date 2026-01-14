@@ -183,10 +183,14 @@
 % ==============================================================================
 % 页眉页脚
 % ==============================================================================
+% Allow language-specific header text to be overridden from main_*.tex
+\newcommand{\lspHeaderLeft}{LSP V3.0 学渣逆袭版}
+\newcommand{\lspHeaderRight}{2026-01-13 | 10:00}
+
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily\color{hackmagenta} LSP V3.0 学渣逆袭版}
-\fancyhead[R]{\small\sffamily 2026-01-13 | 10:00}
+\fancyhead[L]{\small\sffamily\color{hackmagenta} \lspHeaderLeft}
+\fancyhead[R]{\small\sffamily \lspHeaderRight}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 

@@ -1,0 +1,161 @@
+% ==============================================================================
+% Kapitola 4: Pipeline - hra na přiřazování
+% ==============================================================================
+\section{Pipeline (přiřazovačka)}
+
+\begin{hack}[Přiřaď klíčová slova k odpovědím]
+\textbf{Když uvidíš klíčové slovo, rovnou napiš odpověď:}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Zadání říká} & \textbf{Napiš} \\
+\hline
+Data Hazard & Forwarding \\
+\hline
+Load-Use & Stall (bublina) \\
+\hline
+Branch/Jump & Flush (propláchnutí) \\
+\hline
+Structural & Přidej hardware \\
+\hline
+\end{tabular}
+\end{center}
+\end{hack}
+
+\subsection{5-stupňová pipeline (nauč se)}
+
+\begin{formula}[Pět fází]
+\begin{center}
+\texttt{IF $\to$ ID $\to$ EX $\to$ MEM $\to$ WB}
+\end{center}
+
+\begin{tabular}{|c|l|l|}
+\hline
+IF & Instruction Fetch & načtení instrukce \\
+ID & Instruction Decode & dekódování / čtení registrů \\
+EX & Execute & ALU výpočet \\
+MEM & Memory & přístup do paměti \\
+WB & Write Back & zápis zpět \\
+\hline
+\end{tabular}
+\end{formula}
+
+\subsection{Šablona časového diagramu}
+
+\begin{hack}[Kresli podle šablony]
+\begin{verbatim}
+	C1  C2  C3  C4  C5  C6  C7
+I1   IF  ID  EX  MEM WB
+I2       IF  ID  EX  MEM WB
+I3           IF  ID  EX  MEM WB
+I4               IF  ID  EX  MEM WB
+\end{verbatim}
+
+\textbf{Pravidlo:} každá další instrukce je posunutá o jedno políčko doprava
+\end{hack}
+
+\subsection{Tři typy hazardů}
+
+\begin{keybox}[Klasifikace hazardů]
+\textbf{1. Strukturální hazard:}
+\begin{itemize}
+\item konflikt o HW zdroj (např. jeden port do paměti)
+\item řešení: přidat hardware
+\end{itemize}
+
+\textbf{2. Datový hazard:}
+\begin{itemize}
+\item pozdější instrukce potřebuje data, která ještě nejsou hotová
+\item řešení: forwarding nebo stall
+\end{itemize}
+
+\textbf{3. Řídicí hazard:}
+\begin{itemize}
+\item skok/větvení způsobí načtení špatné instrukce
+\item řešení: flush / predikce
+\end{itemize}
+\end{keybox}
+
+\subsection{RAW hazard}
+
+\begin{hack}[Detekce RAW]
+\textbf{Sleduj registry:}
+\begin{verbatim}
+I1: ADD R1, R2, R3   ; zapisuje R1
+I2: SUB R4, R1, R5   ; čte R1 <- RAW!
+\end{verbatim}
+
+\textbf{Test:} čte pozdější instrukce registr, který dřívější zapisuje?
+
+Ano $\to$ RAW hazard.
+\end{hack}
+
+\subsection{Cesty forwardingu}
+
+\begin{hack}[Dvě cesty forwardingu]
+\textbf{1. EX/MEM $\to$ EX:}
+\begin{itemize}
+\item ALU výsledek z předchozí instrukce rovnou do EX
+\item řeší 1-cyklový RAW
+\end{itemize}
+
+\textbf{2. MEM/WB $\to$ EX:}
+\begin{itemize}
+\item výsledek z instrukce před dvěma cykly do EX
+\item řeší 2-cyklový RAW
+\end{itemize}
+\end{hack}
+
+\subsection{Load-use musí stallovat}
+
+\begin{pitfall}[Forwarding nepomůže u load-use]
+\begin{verbatim}
+LW  R1, 0(R2)   ; data jsou až po MEM
+ADD R3, R1, R4  ; potřebuje data v EX
+\end{verbatim}
+
+\textbf{Musíš vložit 1 stall (bublinu):}
+\begin{verbatim}
+	C1  C2  C3  C4  C5  C6
+LW   IF  ID  EX  MEM WB
+ADD      IF  ID  --  EX  MEM
+\end{verbatim}
+
+``--'' je bublina/stall.
+\end{pitfall}
+
+\subsection{Výpočet CPI}
+
+\begin{hack}[Vzorec pro CPI]
+\[
+\text{CPI} = 1 + \text{míra stallů}
+\]
+
+\textbf{Příklad:} 30\% instrukcí je Load, z nich 50\% způsobí stall
+\begin{align*}
+\text{míra stallů} &= 0.3 \times 0.5 = 0.15 \\
+\text{CPI} &= 1 + 0.15 = 1.15
+\end{align*}
+\end{hack}
+
+\subsection{Zrychlení}
+
+\begin{formula}[Vzorec zrychlení]
+\[
+\text{Speedup} = \frac{nk}{k + n - 1} \to k
+\]
+
+$k$ = počet stupňů, $n$ = počet instrukcí
+
+Pro velké $n$ se zrychlení blíží $k$.
+\end{formula}
+
+\begin{hack}[Typický postup řešení]
+\begin{enumerate}
+\item Nakresli časový diagram
+\item Najdi hazardy (kontrola registrů)
+\item Zakresli forwarding nebo stall
+\item Spočítej CPI
+\end{enumerate}
+\end{hack}

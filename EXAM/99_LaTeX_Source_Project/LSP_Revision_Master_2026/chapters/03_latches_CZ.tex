@@ -1,0 +1,133 @@
+% ==============================================================================
+% Kapitola 3: RS záchyt + Shannonův rozklad - pravidlo semaforu
+% ==============================================================================
+\section{RS záchyt (pravidlo semaforu)}
+
+\begin{hack}[RS s NOR - aktivní v 1]
+\textbf{Pomůcka se semaforem:}
+\begin{itemize}
+\item $S=1$ $\to$ $Q$ je 1 (Set)
+\item $R=1$ $\to$ $Q$ je 0 (Reset)
+\item Obě 0 $\to$ \textbf{opiš předchozí stav}
+\item Obě 1 $\to$ napiš ``zakázáno'' / ``nestabilní''
+\end{itemize}
+\end{hack}
+
+\begin{hack}[RS s NAND - aktivní v 0]
+\textbf{Je to obráceně!}
+\begin{itemize}
+\item $\bar{S}=0$ $\to$ $Q$ je 1
+\item $\bar{R}=0$ $\to$ $Q$ je 0
+\item Obě 1 $\to$ \textbf{opiš předchozí stav}
+\item Obě 0 $\to$ zakázáno
+\end{itemize}
+\end{hack}
+
+\subsection{Tabulka RS (nutno umět)}
+
+\begin{center}
+\begin{tabular}{|cc|c|l|}
+\hline
+\textbf{S} & \textbf{R} & \textbf{Q} & \textbf{Co napsat} \\
+\hline
+0 & 0 & Q & opiš předchozí \\
+0 & 1 & 0 & napiš 0 \\
+1 & 0 & 1 & napiš 1 \\
+1 & 1 & ? & napiš ``zakázáno'' \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Postup na časové průběhy}
+
+\begin{hack}[Tři kroky]
+\begin{enumerate}
+\item Na průbězích S a R \textbf{nakresli svislé čáry} v každém bodě změny
+\item Pro každý interval přečti hodnoty S a R
+\item Doplň Q podle tabulky
+\end{enumerate}
+
+\textbf{Pomůcka:} S vysoko $\Rightarrow$ Q vysoko, R vysoko $\Rightarrow$ Q nízko, obě nízko $\Rightarrow$ opiš!
+\end{hack}
+
+% ==============================================================================
+\section{Shannonův rozklad (metoda copy-paste)}
+% ==============================================================================
+
+\begin{hack}[Shannon - jen dosaď do vzorce]
+\textbf{Neodvozuj. Použij šablonu:}
+\[
+F = \bar{A} \cdot F_0 + A \cdot F_1
+\]
+
+\textbf{Tři kroky:}
+\begin{enumerate}
+\item $F_0$: ve výrazu dej všude $A=0$
+\item $F_1$: ve výrazu dej všude $A=1$
+\item Dosadíš do vzorce
+\end{enumerate}
+\end{hack}
+
+\subsection{Praktický příklad}
+
+\begin{example}[Příklad: $F = AB + \bar{A}C + BC$, rozklad podle A]
+\textbf{Krok 1: $F_0$ (A=0)}
+
+Dosadíš $A \to 0$ a $\bar{A} \to 1$:
+\begin{align*}
+F_0 &= (0)B + (1)C + BC \\
+	&= 0 + C + BC \\
+	&= C \quad \text{(absorpce)}
+\end{align*}
+
+\textbf{Krok 2: $F_1$ (A=1)}
+
+Dosadíš $A \to 1$ a $\bar{A} \to 0$:
+\begin{align*}
+F_1 &= (1)B + (0)C + BC \\
+	&= B + 0 + BC \\
+	&= B \quad \text{(absorpce)}
+\end{align*}
+
+\textbf{Krok 3: dosazení do vzorce}
+\[
+\boxed{F = \bar{A} \cdot C + A \cdot B}
+\]
+\end{example}
+
+\begin{hack}[Rychlá absorpce]
+\begin{itemize}
+\item $X + XY = X$ (větší člen stačí)
+\item $X + \bar{X}Y = X + Y$ (doplňkové pravidlo)
+\end{itemize}
+\end{hack}
+
+\subsection{Shannon pro dvě proměnné}
+
+\begin{hack}[Rozklad podle AB současně]
+\textbf{Vzorec:}
+\[
+F = \bar{A}\bar{B}F_{00} + \bar{A}BF_{01} + A\bar{B}F_{10} + ABF_{11}
+\]
+
+\textbf{Postup:} dosaď (A,B)=(0,0), (0,1), (1,0), (1,1).
+\end{hack}
+
+\subsection{Shannon jako MUX}
+
+\begin{keybox}[Shannon = 2:1 multiplexer]
+$F = \bar{A} \cdot F_0 + A \cdot F_1$ odpovídá:
+\begin{itemize}
+\item výběr = $A$
+\item vstup 0 = $F_0$
+\item vstup 1 = $F_1$
+\end{itemize}
+\end{keybox}
+
+\begin{pitfall}[Časté chyby]
+\begin{itemize}
+\item Když dáš $A=0$, tak $\bar{A}=1$ (nepoplést)
+\item Při zjednodušování nezapomeň na absorpci
+\item U MUXu platí $I_0=F_0$ a $I_1=F_1$ (pořadí je důležité)
+\end{itemize}
+\end{pitfall}
