@@ -50,4 +50,3 @@ EXAM/
 
 - ✅ Will test: pipeline
 - ❌ Will NOT test: branch prediction, cache
-
