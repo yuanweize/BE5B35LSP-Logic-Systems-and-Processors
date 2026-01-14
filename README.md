@@ -22,17 +22,15 @@
 ```
 LSP/
 ├── EXAM/                           # 📝 考试资料
-│   ├── LSP_Revision_Master_2026/   # 🎯 V3.0 学渣逆袭LaTeX手册
-│   │   ├── chapters/               # 分章节内容
-│   │   ├── lsp-exam.cls            # 自定义文档类
-│   │   ├── main.tex                # 主文件
-│   │   └── Makefile                # 自动编译
-│   ├── 2015-2026_Exam*.md          # 历年考试真题 (22份)
-│   ├── LSP_终极复习指南.md          # 终极复习指南
-│   ├── LSP_Exam_Methodology_Mastery.md  # 方法论精通
-│   ├── 精选例题集_SelectedExamples.md   # 精选例题V2.1
-│   ├── 📚完整学习索引.md            # 完整索引
-│   └── README.md                   # 考试资料说明
+│   ├── 00_Study_Resources_Common/  # 📖 通用学习资料 (CN/EN/CZ + Printable PDFs)
+│   ├── 99_LaTeX_Source_Project/    # 🎯 LaTeX 源码项目
+│   │   └── LSP_Revision_Master_2026/    # V3.0 学渣逆袭LaTeX手册
+│   ├── 2015-01-07/                 # 历年真题（按日期分目录）
+│   ├── ...
+│   ├── 2026-01-13/
+│   ├── LSP_Ultimate_Review_Guide_CN.md  # 终极复习指南（CN/EN/CZ + Printable PDF）
+│   ├── Study_Index_Complete.md     # 📚 完整索引（强烈推荐从这里开始）
+│   └── README.md                   # EXAM 目录说明
 │
 ├── TASK/                           # 🔧 实验任务
 │   ├── 1/                          # Task1 - 广告牌
@@ -135,10 +133,10 @@ LSP/
 
 ## 📖 推荐复习顺序
 
-1. 📕 先看 `EXAM/LSP_终极复习指南.md`
-2. 📘 做 `EXAM/精选例题集_SelectedExamples.md`
-3. 📗 刷近3年真题 (2023-2025)
-4. 📙 重点关注带答案的考试
+1. 📕 从完整索引开始：`EXAM/Study_Index_Complete.md`
+2. 📘 复习指南（CN/EN/CZ）：`EXAM/LSP_Ultimate_Review_Guide_CN.md`
+3. 📗 做题：`EXAM/00_Study_Resources_Common/精选例题集_SelectedExamples.md`
+4. 📙 刷近3年真题 (2023-2025)，重点关注带答案的考试
 
 ---
 
@@ -161,7 +159,7 @@ LSP/
 
 | 日期 | 更新内容 |
 |------|----------|
-| 2026.01.13 | 所有考试文件添加中英双语翻译 |
+| 2026.01.13 | 更新索引与近年考试资料（CN/EN/CZ + Printable PDFs） |
 | 2026.01.13 | 新增README文档 |
 | 2025.06 | 添加2025年夏季考试 |
 

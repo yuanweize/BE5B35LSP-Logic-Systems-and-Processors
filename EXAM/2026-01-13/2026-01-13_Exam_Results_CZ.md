@@ -1,4 +1,4 @@
-# LSP Exam Results & Solutions — January 13, 2026
+# Výsledky a řešení zkoušky LSP — 13. ledna 2026
 
 > **CVUT FEL (ČVUT) - České vysoké učení technické v Praze | Czech Technical University in Prague**
 >
@@ -10,17 +10,17 @@
 
 ---
 
-## Results (Official) + Detailed Solutions
+## Oficiální výsledky + detailní řešení
 
 > Source PDF (official sheet): [2026-01-13_Exam_Results_Official.pdf](2026-01-13_Exam_Results_Official.pdf)
 >
-> Notes: The PDF contains diagrams (circuits/K-maps). Text extraction preserves *most* official answers, but some purely-graphical parts (notably Q6/Q7 drawings) may not appear as plain text. When a diagram answer is not fully extractable, this document links back to the PDF and provides a robust solving method.
+> Poznámky: The PDF contains diagrams (circuits/K-maps). Text extraction preserves *most* official answers, but some purely-graphical parts (notably Q6/Q7 drawings) may not appear as plain text. When a diagram answer is not fully extractable, this document links back to the PDF and provides a robust solving method.
 
 ---
 
-## Q1 — Moore/Mealy FSM ordered tuple
+## Úloha 1 — Moore/Mealy FSM ordered tuple
 
-### Official answer (from PDF)
+### Oficiální odpověď (from PDF)
 - $X$ is **finite set of all input vectors**
 - $S$ is **finite set of all output vectors**
 - $Z$ is **finite set of all internal states**
@@ -32,15 +32,15 @@
   - Mealy: $\omega: X \times S \to Z$
 - $s_0$ is **initial state** $s_0 \in S$
 
-### Explanation (how to write it fast)
+### Vysvětlení (how to write it fast)
 - **Moore**: output depends only on state $S$.
 - **Mealy**: output depends on input+state $X \times S$.
 
 ---
 
-## Q2 — Simulate circuit outputs $X$ and $Y$ at $t_0..t_4$
+## Úloha 2 — Simulate circuit outputs $X$ and $Y$ at $t_0..t_4$
 
-### Official answer (from PDF)
+### Oficiální odpověď (from PDF)
 Inputs (as shown):
 - $A$: `0 | 1 | 1 | 0 | 0`
 - $B$: `1 | 1 | 0 | 0 | 1`
@@ -49,7 +49,7 @@ Outputs:
 - $X$: `0 | 1 | 1 | 1 | 0`
 - $Y$: `1 | 0 | 0 | 0 | 1`
 
-### Explanation (why these values)
+### Vysvětlení (why these values)
 From the official Q3 formula for the same circuit (see next question), we can interpret $X$ as a **level-sensitive latch** controlled by $B$:
 - If $B=1$ then $X$ follows $A$ (transparent)
 - If $B=0$ then $X$ holds its previous value (memory)
@@ -63,9 +63,9 @@ So:
 
 ---
 
-## Q3 — Shannon expansion + Karnaugh maps ($f_0$, $f_1$)
+## Úloha 3 — Shannon expansion + Karnaugh maps ($f_0$, $f_1$)
 
-### Official answer (from PDF)
+### Oficiální odpověď (from PDF)
 The official expression shown:
 
 - $$X = (A \land B) \lor (X \land (\lnot B \lor (A \land B)))$$
@@ -74,7 +74,7 @@ And:
 - $f_0 = A \land B$
 - $f_1 = (A \land B) \lor (\lnot B \lor (A \land B)) = (A \land B) \lor \lnot B = A \lor \lnot B$
 
-### Explanation (copy-paste method)
+### Vysvětlení (copy-paste method)
 Given $X=f(A,B,X)$, Shannon on variable $X$:
 
 $$X = (\lnot X \land f_0(A,B)) \lor (X \land f_1(A,B))$$
@@ -92,15 +92,15 @@ Interpretation shortcut:
 
 ---
 
-## Q4 — 12-bit number as unsigned and signed (two’s complement)
+## Úloha 4 — 12-bit number as unsigned and signed (two’s complement)
 
 Number: `1000 0001 1111`
 
-### Official answer (from PDF)
+### Oficiální odpověď (from PDF)
 - Unsigned: **2079**
 - Signed (two’s complement): **-2017**
 
-### Explanation
+### Vysvětlení
 Let $N=12$, unsigned value:
 - $1000\ 0001\ 1111_2 = 2^{11} + 2^4+2^3+2^2+2^1+2^0 = 2048+31=2079$
 
@@ -110,15 +110,15 @@ Two’s complement signed:
 
 ---
 
-## Q5 — Equivalent logic functions
+## Úloha 5 — Equivalent logic functions
 
 The PDF text extraction shows the four candidate functions ($y_1..y_4$), but does not explicitly print the “marked” selection.
 
-### Verified equivalence (by exhaustive truth-table check)
+### Ověřená ekvivalence (by exhaustive truth-table check)
 - **$y_1 \equiv y_2 \equiv y_4$**
 - **$y_3$ is not equivalent to them**
 
-Truth tables (ordered by $A,B,C$ from `000` to `111`):
+Pravdivostní tabulky (ordered by $A,B,C$ from `000` to `111`):
 - $y_1$: `11011000`
 - $y_2$: `11011000`
 - $y_4$: `11011000`
@@ -128,7 +128,7 @@ So the correct “mark” set is: **$y_1$, $y_2$, $y_4$**.
 
 ---
 
-## Q6 — One-bit full adder (complete the schema)
+## Úloha 6 — One-bit full adder (complete the schema)
 
 The PDF page shows a schematic to be completed; the exact gate drawing may not appear in plain text extraction.
 
@@ -146,7 +146,7 @@ Let inputs be $A$, $B$, $C_{in}$ and outputs be Sum $S$ and Carry-out $C_{out}$:
 
 ---
 
-## Q7 — Gate-only implementation (AND/NAND/OR/NOR/NOT)
+## Úloha 7 — Gate-only implementation (AND/NAND/OR/NOR/NOT)
 
 The official result for Q7 is primarily diagrammatic in the PDF. If you need an exact “final wiring”, refer to the diagram in:
 - [2026-01-13_Exam_Results_Official.pdf](2026-01-13_Exam_Results_Official.pdf)
@@ -158,9 +158,9 @@ The official result for Q7 is primarily diagrammatic in the PDF. If you need an 
 
 ---
 
-## Q8 — 5 pipeline instruction phases + operations
+## Úloha 8 — 5 pipeline instruction phases + operations
 
-### Official answer (from PDF)
+### Oficiální odpověď (from PDF)
 - **FETCH** — fetches an instruction from memory.
 - **DECODE** — the instruction is decoded and operand values are read from registers.
 - **EXECUTE** — ALU performs an operation on decoded operands.
@@ -172,6 +172,6 @@ The official result for Q7 is primarily diagrammatic in the PDF. If you need an 
 
 ---
 
-## Appendix — How Q5 equivalence was checked
+## Příloha — How Q5 equivalence was checked
 
 A brute-force truth table over all $A,B,C\in\{0,1\}$ shows $y_1=y_2=y_4$ for all 8 combinations.
