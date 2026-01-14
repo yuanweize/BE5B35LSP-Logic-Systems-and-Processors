@@ -1,18 +1,23 @@
-# LSP考试 2025年1月20日（英文版，含答案）
-> ✅ **本文件已核对PDF官方答案 (Official Answers Verified from PDF)**
+# LSP zkouška — 20. ledna 2025 (včetně oficiálních odpovědí)
 
-## 考试信息
-- 日期：2025年1月20日
-- 语言：英语
-- 包含官方答案
+> **CVUT FEL (ČVUT) - České vysoké učení technické v Praze | Czech Technical University in Prague**
+>
+> 🇨🇳 [中文版](2025-01-20_Exam_Answers_CN.md) | 🇬🇧 [English](2025-01-20_Exam_Answers_EN.md) | 🇨🇿 [Čeština](2025-01-20_Exam_Answers_CZ.md)
+
+> ✅ **Ověřeno podle oficiálních odpovědí v PDF**
+
+## Informace o zkoušce
+- Datum: 2025年1月20日
+- Jazyk: 英语
+- Obsahuje oficiální odpovědi
 
 ---
 
-## 第1题 - RS锁存器仿真 (RS Latch Simulation) (5分)
-**题目：** 给定输入A, B, C在时间t0-t4的值，写出X和Y输出的值
+## Úloha 1 - RS锁存器仿真 (RS Latch Simulation) (5分)
+**Zadání:** 给定输入A, B, C在时间t0-t4的值，写出X和Y输出的值
 **[English]** Given inputs A, B, C values at times t0-t4, write the values of X and Y outputs
 
-**输入序列：**
+**Vstupní sekvence:**
 ```
 A = 0 | 0 | 1 | 1 | 0
 B = 1 | 0 | 1 | 1 | 1
@@ -20,16 +25,16 @@ C = 1 | 0 | 0 | 1 | 1
     t0  t1  t2  t3  t4
 ```
 
-> ✅ **官方参考答案 (Official Answer):**
+> ✅ **Oficiální odpověď (Official Answer):**
 > - **X = 11001** (t0=1, t1=1, t2=0, t3=0, t4=1)
 > - **Y = 01100** (t0=0, t1=1, t2=1, t3=0, t4=0)
 
-> 💡 **补充解析：** RS锁存器 (RS Latch) 分析步骤：先看Reset信号A，再看Set信号B·C
+> 💡 **Doplňující poznámky:** RS锁存器 (RS Latch) 分析步骤：先看Reset信号A，再看Set信号B·C
 
 ---
 
-## 第2题 - Shannon展开 (Shannon Expansion) (6分)
-**题目：** 将X=f(A,B,C,X)分解为Shannon展开形式
+## Úloha 2 - Shannon展开 (Shannon Expansion) (6分)
+**Zadání:** 将X=f(A,B,C,X)分解为Shannon展开形式
 **[English]** Decompose X=f(A,B,C,X) using Shannon expansion
 
 **✅ 官方答案（卡诺图 Karnaugh Map）：**
@@ -41,12 +46,12 @@ C 0 │  0  │  0  │  1  │  0   │  0  │  0  │  1  │  0
   1 │  0  │  0  │  0  │  0   │  0  │  0  │  1  │  0
 ```
 
-> 💡 **补充解析：** f₀ = f|ₓ₌₀（X为0时的函数），f₁ = f|ₓ₌₁（X为1时的函数）
+> 💡 **Doplňující poznámky:** f₀ = f|ₓ₌₀（X为0时的函数），f₁ = f|ₓ₌₁（X为1时的函数）
 
 ---
 
-## 第3题 - 等价逻辑函数 (Equivalent Logic Functions) (4分)
-**题目：** 勾选所有具有等价函数的逻辑函数
+## Úloha 3 - 等价逻辑函数 (Equivalent Logic Functions) (4分)
+**Zadání:** 勾选所有具有等价函数的逻辑函数
 **[English]** Check all logic functions that have an equivalent function
 
 ```vhdl
@@ -56,33 +61,33 @@ y3 <= (A or C or D) and (A or B) and (not D or C);
 y4 <= (((not A and not D) or (A and C)) and B) or (A and D);
 ```
 
-**✅ 官方答案：** y1 ≡ y4
+**✅ Oficiální odpověď:** y1 ≡ y4
 
-> 💡 **补充解析：** 可用卡诺图或代数化简验证，两者展开后表达式相同
+> 💡 **Doplňující poznámky:** 可用卡诺图或代数化简验证，两者展开后表达式相同
 
 ---
 
-## 第4题 - 10位加法器运算 (10-bit Adder Arithmetic) (4分)
-**题目：** 1023+1023+1023+1023在10位加法器上的结果
+## Úloha 4 - 10位加法器运算 (10-bit Adder Arithmetic) (4分)
+**Zadání:** 1023+1023+1023+1023在10位加法器上的结果
 **[English]** Result of 1023+1023+1023+1023 on a 10-bit adder
 
-**计算：**
+**Výpočet:**
 - 1023 = 2^10 - 1 = 0x3FF (10位全1)
 - 4 × 1023 = 4092
 - 4092 mod 1024 = 1020
 
-**✅ 官方答案：**
+**✅ Oficiální odpověď:**
 - a) **unsigned**: **(1024-1)×4 = 4096-4 ≡ -4 ≡ 1020 (mod 1024)**
 - b) **signed**: **1023在有符号中表示-1，4×(-1) = -4**
 
-> 💡 **补充解析 (Two's Complement)：**
+> 💡 **Doplňující poznámky (Two's Complement)：**
 > - 10位全1 = 1023 (unsigned) = -1 (signed)
 > - 关键：signed解释下 1023 = -1
 
 ---
 
-## 第5题 - 全加器设计 (Full Adder Design) (6分)
-**题目：** 设计一个全加器电路
+## Úloha 5 - 全加器设计 (Full Adder Design) (6分)
+**Zadání:** 设计一个全加器电路
 **[English]** Design a full adder circuit
 
 **全加器公式 (Full Adder Formulas)：**
@@ -91,33 +96,33 @@ Sum = A ⊕ B ⊕ Cin
 Cout = (A ∧ B) ∨ (Cin ∧ (A ⊕ B))
 ```
 
-> 💡 **补充解析：** 
+> 💡 **Doplňující poznámky:** 
 > - Sum用两级XOR门
 > - Cout = 多数表决器 (Majority Function)
 
 ---
 
-## 第6题 - 用NOR门实现XOR (XOR using NOR Gates) (5分)
-**题目：** 仅使用NOR门实现XOR功能
+## Úloha 6 - 用NOR门实现XOR (XOR using NOR Gates) (5分)
+**Zadání:** 仅使用NOR门实现XOR功能
 **[English]** Implement XOR using only NOR gates
 
-**✅ 官方答案：**
+**✅ Oficiální odpověď:**
 ```
 A xor B = (A nor B) nor ((A nor A) nor (B nor B))
 ```
 
-> 💡 **补充解析 (De Morgan's Theorem)：**
+> 💡 **Doplňující poznámky (De Morgan's Theorem)：**
 > - A nor A = NOT A
 > - 需要4个NOR门实现XOR
 > - XOR = (A+B)·(Ā+B̄) = (A+B)·NOT(A·B)
 
 ---
 
-## 第7题 - Gray码转换器VHDL (Gray Code Converter) (10分)
-**题目：** 用单个并发语句描述电路
+## Úloha 7 - Gray码转换器VHDL (Gray Code Converter) (10分)
+**Zadání:** 用单个并发语句描述电路
 **[English]** Describe the circuit using a single concurrent statement
 
-**✅ 官方答案：**
+**✅ Oficiální odpověď:**
 ```vhdl
 library ieee; use ieee.std_logic_1164.all; use ieee.numeric_std.all;
 entity Test20250120q7 is 
@@ -130,18 +135,18 @@ begin
 end architecture rtl;
 ```
 
-> 💡 **补充解析 (Gray Code Conversion)：**
+> 💡 **Doplňující poznámky (Gray Code Conversion)：**
 > - 二进制转格雷码：G = B XOR (B >> 1)
 > - `'0' & x(3 downto 1)` = 右移1位并在高位补0
 > - 格雷码特性：相邻值只有1位不同
 
 ---
 
-## 第8题 - 分支预测器和Cache (Branch Prediction & Cache) (10分)
+## Úloha 8 - 分支预测器和Cache (Branch Prediction & Cache) (10分)
 
-> 🛑 **非考点提示 (Not on Exam):** 根据2026年1月考试说明，分支预测器和Cache相关内容本次不考，整题可战略性跳过。
+> 🛑 **Mimo rozsah zkoušky:** 根据2026年1月考试说明，分支预测器和Cache相关内容本次不考，整题可战略性跳过。
 
-**题目：** 分析程序的分支预测和Cache miss
+**Zadání:** 分析程序的分支预测和Cache miss
 **[English]** Analyze the branch prediction and cache miss of the program
 
 **程序：**
@@ -153,27 +158,27 @@ for (i=0; i<5; i++) {
 ```
 
 ### A) 分支预测器 (Branch Predictor)
-**题目：** 计算1位和2位分支预测器的miss次数
+**Zadání:** 计算1位和2位分支预测器的miss次数
 **[English]** Calculate the number of misses for 1-bit and 2-bit branch predictors
 
-**✅ 官方答案：**
+**✅ Oficiální odpověď:**
 - **1位预测器（初始NT）**: 2（外循环）+ 5×2（内循环）= **12次miss**
 - **2位预测器（初始WT）**: 1（外循环）+ 5×1（内循环）= **6次miss**
 
-> 💡 **补充解析：**
+> 💡 **Doplňující poznámky:**
 > - 1位：每个循环入口miss + 出口miss = 2次
 > - 2位：容忍一次预测错误，仅出口miss = 1次
 
 ### B) Cache Miss计算 (Cache Miss Calculation)
-**题目：** 64位处理器，直接映射 (Direct-Mapped)，32KB cache，块长4字 (4-word block)
+**Zadání:** 64位处理器，直接映射 (Direct-Mapped)，32KB cache，块长4字 (4-word block)
 **[English]** 64-bit processor, direct-mapped, 32KB cache, 4-word block
 
-**✅ 官方答案：**
+**✅ Oficiální odpověď:**
 - 2000个double × 8字节 = 16000字节 < 32KB（可完全放入cache）
 - 每块4字 × 8字节 = 32字节 = 4个double
 - Cache miss = 2000 / 4 = **500次miss**
 
-> 💡 **补充解析 (Cache Calculation Formula)：**
+> 💡 **Doplňující poznámky (Cache Calculation Formula)：**
 > ```
 > Miss次数 = 数组元素数 / 每块容纳的元素数
 >          = 2000 / (块大小/元素大小)
@@ -182,9 +187,9 @@ for (i=0; i<5; i++) {
 
 ---
 
-## 知识点总结
+## Shrnutí
 
-### ✅ 重要答案速记（高频考点！）
+### ✅ Rychlé odpovědi（高频考点！）
 | 题号 | 类型 | 答案 |
 |------|------|------|
 | 1 | RS仿真 | X=00110, Y=10001 |
@@ -194,7 +199,7 @@ for (i=0; i<5; i++) {
 | 8A | 分支预测 | **1位:12, 2位:6** |
 | 8B | Cache | **500次miss** |
 
-### ⭐ 必背公式
+### ⭐ Nutné vzorce
 
 #### 10位有符号/无符号运算
 - 1023在10位unsigned = 1023

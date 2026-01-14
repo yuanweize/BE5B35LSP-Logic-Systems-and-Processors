@@ -34,15 +34,15 @@
 | 2023 | [2023-06-13/](2023-06-13/) | [Exam](2023-06-13/2023-06-13_Exam.md) | [PDF](2023-06-13/2023-06-13_Exam.pdf) | RS锁存器、环形移位寄存器 |
 | 2023 | [2023-06-23/](2023-06-23/) | [Exam](2023-06-23/2023-06-23_Exam.md) | [PDF](2023-06-23/2023-06-23_Exam.pdf) | 分支预测器、2路Cache LRU |
 | 2023 | [2023-07-06/](2023-07-06/) | [Exam](2023-07-06/2023-07-06_Exam.md) | [PDF](2023-07-06/2023-07-06_Exam.pdf) | 分支预测器、边沿检测 |
-| 2024 | [2024-05-28/](2024-05-28/) | [Exam + Answers](2024-05-28/2024-05-28_Exam_Answers.md) | [PDF](2024-05-28/2024-05-28_Exam_Answers.pdf) | y2≡y4、分支预测器 |
-| 2024 | [2024-06-05/](2024-06-05/) | [Exam + Answers](2024-06-05/2024-06-05_Exam_Answers.md) | [PDF](2024-06-05/2024-06-05_Exam_Answers.pdf) | Gray码VHDL、移位寄存器 |
-| 2024 | [2024-06-14/](2024-06-14/) | [Exam + Answers](2024-06-14/2024-06-14_Exam_Answers.md) | [PDF](2024-06-14/2024-06-14_Exam_Answers.pdf) | -1加法器、异步总线 |
+| 2024 | [2024-05-28/](2024-05-28/) | [CN](2024-05-28/2024-05-28_Exam_Answers_CN.md) / [EN](2024-05-28/2024-05-28_Exam_Answers_EN.md) / [CZ](2024-05-28/2024-05-28_Exam_Answers_CZ.md) | [Official PDF](2024-05-28/2024-05-28_Exam_Answers.pdf) | ✅ tri-language + printable PDFs · y2≡y4、分支预测器 |
+| 2024 | [2024-06-05/](2024-06-05/) | [CN](2024-06-05/2024-06-05_Exam_Answers_CN.md) / [EN](2024-06-05/2024-06-05_Exam_Answers_EN.md) / [CZ](2024-06-05/2024-06-05_Exam_Answers_CZ.md) | [Official PDF](2024-06-05/2024-06-05_Exam_Answers.pdf) | ✅ tri-language + printable PDFs · Gray码VHDL、移位寄存器 |
+| 2024 | [2024-06-14/](2024-06-14/) | [CN](2024-06-14/2024-06-14_Exam_Answers_CN.md) / [EN](2024-06-14/2024-06-14_Exam_Answers_EN.md) / [CZ](2024-06-14/2024-06-14_Exam_Answers_CZ.md) | [Official PDF](2024-06-14/2024-06-14_Exam_Answers.pdf) | ✅ tri-language + printable PDFs · -1加法器、异步总线 |
 | 2024 | [2024-12-20/](2024-12-20/) | [CN](2024-12-20/2024-12-20_Exam_Answers_CN.md) / [EN](2024-12-20/2024-12-20_Exam_Answers_EN.md) / [CZ](2024-12-20/2024-12-20_Exam_Answers_CZ.md) | [Official PDF](2024-12-20/2024-12-20_Exam_Answers.pdf) | ✅ tri-language + printable PDFs |
-| 2025 | [2025-01-20/](2025-01-20/) | [Exam + Answers](2025-01-20/2025-01-20_Exam_Answers.md) | [PDF](2025-01-20/2025-01-20_Exam_Answers.pdf) | 1023×4=1020/-4 |
+| 2025 | [2025-01-20/](2025-01-20/) | [CN](2025-01-20/2025-01-20_Exam_Answers_CN.md) / [EN](2025-01-20/2025-01-20_Exam_Answers_EN.md) / [CZ](2025-01-20/2025-01-20_Exam_Answers_CZ.md) | [Official PDF](2025-01-20/2025-01-20_Exam_Answers.pdf) | ✅ tri-language + printable PDFs · 1023×4=1020/-4 |
 | 2025 | [2025-06-04/](2025-06-04/) | [CN](2025-06-04/2025-06-04_Exam_Answers_CN.md) / [EN](2025-06-04/2025-06-04_Exam_Answers_EN.md) / [CZ](2025-06-04/2025-06-04_Exam_Answers_CZ.md) | [Official PDF](2025-06-04/2025-06-04_Exam_Answers.pdf) | ✅ tri-language + printable PDFs |
 | 2025 | [2025-06-09/](2025-06-09/) | [CN](2025-06-09/2025-06-09_Exam_CN.md) / [EN](2025-06-09/2025-06-09_Exam_EN.md) / [CZ](2025-06-09/2025-06-09_Exam_CZ.md) | [Official PDF](2025-06-09/2025-06-09_Exam.pdf) | ✅ tri-language + printable PDFs |
 | 2025 | [2025-06-19/](2025-06-19/) | [CN](2025-06-19/2025-06-19_Exam_CN.md) / [EN](2025-06-19/2025-06-19_Exam_EN.md) / [CZ](2025-06-19/2025-06-19_Exam_CZ.md) | [Official PDF](2025-06-19/2025-06-19_Exam.pdf) | ✅ tri-language + printable PDFs |
-| 2026 | [2026-01-13/](2026-01-13/) | [Exam Results (EN)](2026-01-13/2026-01-13_Exam_Results_EN.md) | [Official PDF](2026-01-13/2026-01-13_Exam_Results_Official.pdf) | |
+| 2026 | [2026-01-13/](2026-01-13/) | [CN](2026-01-13/2026-01-13_Exam_Results_CN.md) / [EN](2026-01-13/2026-01-13_Exam_Results_EN.md) / [CZ](2026-01-13/2026-01-13_Exam_Results_CZ.md) | [Official PDF](2026-01-13/2026-01-13_Exam_Results_Official.pdf) | ✅ tri-language + printable PDFs |
 
 ### 📖 学习资料
 
