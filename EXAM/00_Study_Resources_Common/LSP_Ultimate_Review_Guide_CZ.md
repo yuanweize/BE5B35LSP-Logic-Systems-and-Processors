@@ -8,7 +8,9 @@
 
 ---
 
-# 🎯 LSP 考试终极复习指南 - 10小时冲刺版
+# 🎯 Ultimátní průvodce opakováním LSP — 10hodinový sprint
+
+> Poznámka: Tato CZ verze je zatím odvozena z CN masteru; některé názvy sekcí a příklady zůstávají dočasně v čínštině.
 
 > **考试时间**: 2026年1月13日 10:00-11:30  
 > **考试地点**: Karlovo náměstí A楼 KN-A-310  
