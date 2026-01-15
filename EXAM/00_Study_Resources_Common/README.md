@@ -1,4 +1,4 @@
-> 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
+> 🌍 **Language**: [🇨🇳 中文 (CN)](./README_CN.md) | [🇨🇿 Čeština (CZ)](./README_CZ.md)
 
 # LSP Common Study Resources
 
@@ -34,6 +34,5 @@ This folder contains shared study resources that are not tied to a specific exam
 
 ## Other
 
-- [README_md.pdf](README_md.pdf)
 - [LSP_Exam_Methodology_Mastery_md.pdf](LSP_Exam_Methodology_Mastery_md.pdf)
 - [Legacy_Complete_Study_Index_md.pdf](Legacy_Complete_Study_Index_md.pdf)

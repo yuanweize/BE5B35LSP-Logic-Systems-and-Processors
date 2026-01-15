@@ -1,4 +1,4 @@
-> 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
+> 🌍 **Language**: [🇨🇳 中文 (CN)](./README_CN.md) | [🇨🇿 Čeština (CZ)](./README_CZ.md)
 
 # 📚 LSP / Logické systémy a procesory — EXAM Index
 
@@ -12,7 +12,7 @@ This folder was migrated to keep the EXAM root clean:
 ## ✅ Start Here
 
 - Main index: [Study_Index_Complete.md](Study_Index_Complete.md)
-- Guides (CN/EN/CZ + Printable PDFs): [00_Study_Resources_Common/README_EN.md](00_Study_Resources_Common/README_EN.md)
+- Guides (CN/EN/CZ + Printable PDFs): [00_Study_Resources_Common/README.md](00_Study_Resources_Common/README.md)
 
 ## 📁 Current Layout (Top Level)
 
@@ -50,4 +50,3 @@ EXAM/
 
 - ✅ Will test: pipeline
 - ❌ Will NOT test: branch prediction, cache
-

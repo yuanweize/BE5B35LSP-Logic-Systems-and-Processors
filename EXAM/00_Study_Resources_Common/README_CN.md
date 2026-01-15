@@ -1,4 +1,4 @@
-> 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
+> 🌍 **Language**: [🇬🇧 English (Main)](./README.md) | [🇨🇿 Čeština (CZ)](./README_CZ.md)
 
 # LSP 通用复习资料
 
@@ -34,6 +34,5 @@
 
 ## 其他
 
-- [README_md.pdf](README_md.pdf)
 - [LSP_Exam_Methodology_Mastery_md.pdf](LSP_Exam_Methodology_Mastery_md.pdf)
 - [Legacy_Complete_Study_Index_md.pdf](Legacy_Complete_Study_Index_md.pdf)
