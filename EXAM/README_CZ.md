@@ -1,4 +1,4 @@
-> 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
+> 🌍 **Language**: [🇬🇧 English (Main)](./README.md) | [🇨🇳 中文 (CN)](./README_CN.md)
 
 # 📚 LSP / Logické systémy a procesory — EXAM index
 

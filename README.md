@@ -1,4 +1,4 @@
-> 🌍 **Language**: [🇨🇳 中文](./README_CN.md) | [🇬🇧 English](./README_EN.md) | [🇨🇿 Čeština](./README_CZ.md)
+> 🌍 **Language**: [🇨🇳 中文 (CN)](./README_CN.md) | [🇨🇿 Čeština (CZ)](./README_CZ.md)
 
 # 🎓 LSP - Logic Systems and Processors
 
@@ -57,7 +57,7 @@ LSP/
 │
 ├── tools/                          # 🛠️ Tools
 │   ├── md2pdf.py                   # Markdown → PDF
-│   └── batch_convert.py            # Batch conversion
+│   └── batch_convert.py            # 批量转换
 │
 ├── BinaryPrerequisite_V20.pdf      # Binary prerequisites
 ├── LogicCircuitsOnFPGAs.pdf        # Logic circuits on FPGAs
@@ -120,7 +120,7 @@ LSP/
 - ~~Branch prediction~~
 - ~~Cache~~
 
-See [EXAM/README_EN.md](EXAM/README_EN.md)
+See [EXAM/README.md](EXAM/README.md)
 
 ---
 
